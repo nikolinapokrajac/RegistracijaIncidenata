@@ -1,0 +1,29 @@
+﻿@model List<IncidentType>
+<h2>Lista vrsta incidenata</h2>
+<a asp-controller="IncidentType" asp-action="Upsert" class="btn btn-primary"><i class="bi bi-plus-square-fill"></i>  Dodaj vrstu incidenta</a>
+<table class="table-bordered" style="border:1px solid blue;border-collapse: collapse;">
+    <thead>
+        <tr style="border: 1px solid blue;">
+            <th style="border: 1px solid blue;">ID</th>
+            <th style="border: 1px solid blue;">Name</th>
+            <th style="border: 1px solid blue;">Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var obj in Model)
+        {
+            <tr style="border: 1px solid blue;">
+                <td style="border: 1px solid blue;">@obj.Id</td>
+                <td style="border: 1px solid blue;">@obj.Name</td>
+                <td style="border: 1px solid blue;">@obj.Description</td>
+                <td>
+                    <a asp-route-id="@obj.Id" asp-controller="IncidentType" asp-action="Upsert" class="btn btn-secondary"><i class="bi bi-pen-fill"></i> Uredi</a>
+                </td>
+                <td>
+                    <a asp-route-id="@obj.Id" asp-controller="IncidentType" asp-action="Delete" class="btn btn-secondary"><i class="bi bi-trash3-fill"></i> Obriši</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

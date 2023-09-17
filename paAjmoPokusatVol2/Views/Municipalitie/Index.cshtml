@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Municipalitie>
+<h2>Lista opština</h2>
+<a asp-controller="Municipalitie" asp-action="Create" class="btn btn-primary"><i class="bi bi-plus-square-fill"></i>  Dodaj novu opštinu</a>
+
+<div class="row pb-3">
+    @foreach(var municipalitie in Model)
+    {
+        <div class="col-lg-3 col-sm-6">
+            <div class="p-2">
+                <div class="card border-0 p-3 shadow border-top border-5 rounded">
+                    <img src="@municipalitie.UrlImage" class="card-img-top rounded">
+                    <div class="card-body pb-0">
+                        <div class="pl-1">
+                            <p class="card-title h5 opacity-75 text-uppercase text-center">@municipalitie.Name</p>
+                            <p class="card-title text-center">@municipalitie.Address</p>
+                        </div>
+                        <div class="row">
+                        <a asp-route-id="@municipalitie.Id" asp-controller="Municipalitie" asp-action="Edit" class="btn btn-secondary"><i class="bi bi-pen-fill"></i> Uredi</a>
+                        </div>
+                        <div class="row">
+                        <a asp-route-id="@municipalitie.Id" asp-controller="Municipalitie" asp-action="Delete" class="btn btn-secondary"><i class="bi bi-trash3-fill"></i> Obriši</a>
+                        </div>
+                        </div>
+                </div>
+            </div>
+            </div>
+    }
+</div>
