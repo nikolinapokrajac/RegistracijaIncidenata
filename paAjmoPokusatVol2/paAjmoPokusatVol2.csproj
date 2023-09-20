@@ -8,7 +8,10 @@
 
   <ItemGroup>
     <PackageReference Include="Abp" Version="8.3.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.10">
       <PrivateAssets>all</PrivateAssets>
@@ -19,9 +22,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\paAjmoPokusat.DataAccess\paAjmoPokusat.DataAccess.csproj" />
+    <ProjectReference Include="..\paAjmoPokusat.EmailService\paAjmoPokusat.EmailService.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Admin\Views\" />
+    <Folder Include="Areas\Operater\Controllers\" />
+    <Folder Include="Areas\Operater\Views\" />
     <Folder Include="wwwroot\images\incidentType\" />
     <Folder Include="wwwroot\images\municipalitie\" />
   </ItemGroup>

@@ -91,10 +91,13 @@ namespace paAjmoPokusatVol2.Controllers
                     if (!string.IsNullOrEmpty(municipalitieTypePath))
                     {
                         //delete the old image
-                        var oldImagePath = Path.Combine(wwwRootPath, obj.UrlImage.TrimStart('\\'));
-                        if (System.IO.File.Exists(oldImagePath))
+                        if (obj.UrlImage != null)
                         {
-                            System.IO.File.Delete(oldImagePath);
+                            var oldImagePath = Path.Combine(wwwRootPath, obj.UrlImage.TrimStart('\\'));
+                            if (System.IO.File.Exists(oldImagePath))
+                            {
+                                System.IO.File.Delete(oldImagePath);
+                            }
                         }
                     }
                     using (var fileStream = new FileStream(Path.Combine(municipalitieTypePath, fileName), FileMode.Create))

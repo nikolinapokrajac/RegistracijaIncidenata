@@ -1,20 +1,23 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using paAjmoPokusat.Models;
 
 namespace paAjmoPokusat.DataAccess.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
         public DbSet<IncidentType> IncidentTypes { get; set; }
         public DbSet<Municipalitie> Municipalities { get; set; }
         public DbSet<Incident> Incidents { get; set; }
         public DbSet<IncidentImage> IncidentImages { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<IncidentType>().HasData(
                 new IncidentType
                 {

@@ -118,10 +118,13 @@ namespace paAjmoPokusatVol2.Controllers
                     if (!string.IsNullOrEmpty(incidentTypePath))
                     {
                         //delete the old image
-                        var oldImagePath = Path.Combine(wwwRootPath, incidentType.ImageUrl.TrimStart('\\'));
-                        if (System.IO.File.Exists(oldImagePath))
+                        if (incidentType.ImageUrl != null)
                         {
-                            System.IO.File.Delete(oldImagePath);
+                            var oldImagePath = Path.Combine(wwwRootPath, incidentType.ImageUrl.TrimStart('\\'));
+                            if (System.IO.File.Exists(oldImagePath))
+                            {
+                                System.IO.File.Delete(oldImagePath);
+                            }
                         }
                     }
                     using (var fileStream = new FileStream(Path.Combine(incidentTypePath, fileName), FileMode.Create))
