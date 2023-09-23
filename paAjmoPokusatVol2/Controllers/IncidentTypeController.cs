@@ -106,6 +106,7 @@ namespace paAjmoPokusatVol2.Controllers
 
         public IActionResult Upsert(IncidentType incidentType, IFormFile? file)
         {
+
             //TempData["success"] = "Uspješno";
             if (ModelState.IsValid)
             {

@@ -23,13 +23,13 @@ var emailConfig = builder.Configuration
         .GetSection("EmailConfiguration")
         .Get<paAjmoPokusat.EmailService.EmailConfiguration>();
 builder.Services.AddSingleton(emailConfig);
-builder.Services.AddAuthentication().AddGoogleOpenIdConnect(options =>
-{
-    options.ClientId = "689151936674-oik1sbmianfrhrq22o5l24jv48f174f9.apps.googleusercontent.com";
-    options.ClientSecret = "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";
-    options.CallbackPath = "/";
-});
-builder.Services.AddControllers();
+//builder.Services.AddAuthentication().AddGoogleOpenIdConnect(options =>
+//{
+//    options.ClientId = "689151936674-oik1sbmianfrhrq22o5l24jv48f174f9.apps.googleusercontent.com";
+//    options.ClientSecret = "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";
+//    options.CallbackPath = "/";
+//});
+//builder.Services.AddControllers();
 
 var app = builder.Build();
 

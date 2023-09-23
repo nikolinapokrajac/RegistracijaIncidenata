@@ -12,6 +12,7 @@
         <div class="card-body p-4">
             <form method="post" class="=row" enctype="multipart/form-data">
                 <input asp-for="Incident.Id" hidden />
+                <input asp-for="Incident.IncidentImages" hidden />
                 <div class="row">
                     <div class="col-10">
                         <div class="border p-3">
@@ -52,12 +53,14 @@
                             <div class="row">
                                 <div class="col-6 col-md-3">
                                     @*<button type="submit" class="btn btn-primary form-control">Dodaj novi incident</button>*@
-                                    @if (Model.Incident.Id != 0)
-                                    {
+                                    @if (Model.Incident.Id != 0){
                                         <button type="submit" class="btn btn-primary form-control">Uredi postojeći incident</button>
                                     }
                                     else
                                     {
+                                        
+                                            Model.Incident.UserNameOfPersonThatAddedIncident = User.Identity.Name.ToString();
+                                        
                                         <button type="submit" class="btn btn-primary form-control">Dodaj novi incident</button>
                                     }
                                 </div>

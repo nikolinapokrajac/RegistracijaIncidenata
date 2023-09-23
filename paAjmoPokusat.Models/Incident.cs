@@ -29,5 +29,8 @@ namespace paAjmoPokusat.Models
         public Municipalitie Municipalitie { get; set; }
         [ValidateNever]
         public List<IncidentImage> IncidentImages { get; set; }
+        [ValidateNever]
+
+        public string UserNameOfPersonThatAddedIncident { get; set; }
     }
 }

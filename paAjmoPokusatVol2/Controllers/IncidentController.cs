@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using paAjmoPokusat.DataAccess.Repository.IRepository;
 using paAjmoPokusat.Models;
@@ -33,7 +32,26 @@ namespace paAjmoPokusatVol2.Controllers
         {
             //List<Incident> objIncidentList = _db.Incidents.ToList();
             //List<Incident> objIncidentList = _incidentRepo.GetAll().ToList(); //ovdje dodali UnitOfWork
-            List<Incident> objIncidentList = _unitOfWork.Incident.GetAll(includeProperties: "IncidentType,Municipalitie").ToList();
+            //if (User.IsInRole(paAjmoPokusat.Utility.SD.Role_Operater))
+            //{
+            //List<Incident> objIncidentList = _unitOfWork.Incident.GetAll(i => i.UserNameOfPersonThatAddedIncident == User.Identity.Name, includeProperties: "IncidentType,Municipalitie").ToList();
+            //}
+            //else if (User.IsInRole(paAjmoPokusat.Utility.SD.Role_Admin))
+            //{
+            //    List<Incident> objIncidentList = _unitOfWork.Incident.GetAll(includeProperties: "IncidentType,Municipalitie").ToList();
+            //}
+            //List<Incident> objIncidentList = _unitOfWork.Incident.GetAll(includeProperties: "IncidentType,Municipalitie").ToList();
+            //IEnumerable<SelectListItem> IncidentTypeList = _unitOfWork.IncidentType.GetAll().Select(u => new SelectListItem { Text = u.Name, Value = u.Id.ToString() });
+            //IEnumerable<SelectListItem> MunicipalitieList = _unitOfWork.Municipalitie.GetAll().Select(m => new SelectListItem { Text = m.Name, Value = m.Id.ToString() });
+            List<Incident> objIncidentList = null;
+            //if (User.IsInRole(paAjmoPokusat.Utility.SD.Role_Operater))
+            //{
+            //    objIncidentList = _unitOfWork.Incident.GetAll(i => i.UserNameOfPersonThatAddedIncident == User.Identity.Name, includeProperties: "IncidentType,Municipalitie").ToList();
+            //}
+            //else if (User.IsInRole(paAjmoPokusat.Utility.SD.Role_Admin))
+            //{
+            //    objIncidentList = _unitOfWork.Incident.GetAll(includeProperties: "IncidentType,Municipalitie").ToList();
+            //}
             return View(objIncidentList);
         }
 
@@ -123,6 +141,7 @@ namespace paAjmoPokusatVol2.Controllers
             };
             if (id == null || id == 0)
             {
+                // incidentVM.Incident.UserNameOfPersonThatAddedIncident = User.Identity.Name;
                 return View(incidentVM);
             }
             else
@@ -136,11 +155,13 @@ namespace paAjmoPokusatVol2.Controllers
 
         public IActionResult Upsert(IncidentVM incidentVM, List<IFormFile> files)
         {
+            incidentVM.Incident.UserNameOfPersonThatAddedIncident = User.Identity.Name.ToString();
             //TempData["success"] = "Uspješno";
             if (ModelState.IsValid)
             {
                 if (incidentVM.Incident.Id == 0)
                 {
+
                     _unitOfWork.Incident.Add(incidentVM.Incident);
                     //TempData["success"] += " dodan novi ";
                 }
@@ -250,7 +271,19 @@ namespace paAjmoPokusatVol2.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Incident> objIncidentList = _unitOfWork.Incident.GetAll(includeProperties: "IncidentType,Municipalitie").ToList();
+            //IEnumerable<SelectListItem> IncidentTypeList = _unitOfWork.IncidentType.GetAll().Select(u => new SelectListItem { Text = u.Name, Value = u.Id.ToString() });
+            //IEnumerable<SelectListItem> MunicipalitieList = _unitOfWork.Municipalitie.GetAll().Select(m => new SelectListItem { Text = m.Name, Value = m.Id.ToString() });
+            List<Incident> objIncidentList = null;
+            //List<Incident> objIncidentList = _unitOfWork.Incident.GetAll(includeProperties: "IncidentType,Municipalitie").ToList();
+            //List<Incident> objIncidentList = _unitOfWork.Incident.GetAll(i => i.UserNameOfPersonThatAddedIncident == User.Identity.Name, includeProperties: "IncidentType,Municipalitie").ToList();
+            if (User.IsInRole(paAjmoPokusat.Utility.SD.Role_Operater))
+            {
+                objIncidentList = _unitOfWork.Incident.GetAll(i => i.UserNameOfPersonThatAddedIncident == User.Identity.Name, includeProperties: "IncidentType,Municipalitie").ToList();
+            }
+            else if (User.IsInRole(paAjmoPokusat.Utility.SD.Role_Admin))
+            {
+                objIncidentList = _unitOfWork.Incident.GetAll(includeProperties: "IncidentType,Municipalitie").ToList();
+            }
             Console.WriteLine(objIncidentList.Count);
             return Json(new { data = objIncidentList });
         }
@@ -278,6 +311,21 @@ namespace paAjmoPokusatVol2.Controllers
 
             return Json(new { success = true, message = "Uspješno obrisan incident" });
         }
+        //[HttpGet]
+        //public IActionResult GetOptionsIncidentType()
+        //{
+        //    var optionsIncidentType = _unitOfWork.IncidentType.GetAll().Select(u => new SelectListItem { Text = u.Name, Value = u.Id.ToString() }).ToList();
+
+        //    return Json(optionsIncidentType);
+        //}
+        //[HttpGet]
+        //public IActionResult GetOptionsMunicipalitie()
+        //{
+        //    var optionsMunicipalitie = _unitOfWork.Municipalitie.GetAll().Select(u => new SelectListItem { Text = u.Name, Value = u.Id.ToString() }).ToList();
+
+        //    return Json(optionsMunicipalitie);
+        //}
         #endregion
     }
 }
+
