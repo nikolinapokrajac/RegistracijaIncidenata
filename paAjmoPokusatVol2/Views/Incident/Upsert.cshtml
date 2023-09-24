@@ -35,6 +35,10 @@
                                 <input asp-for="Incident.DeadPeopleCount" class="form-control border-0 shadow" />
                             </div>
                             <div class="form-floating col-12 py-2">
+                                <label asp-for="Incident.dateIncident" class="ns-2"></label>
+                                <input asp-for="Incident.dateIncident" class="form-control border-0 shadow" />
+                            </div>
+                            <div class="form-floating col-12 py-2">
                                 <select asp-for="@Model.Incident.IncidentTypeId" asp-items="@Model.IncidentTypeList" class="form-select border-0 shadow">
                                     <option disabled selected>-Odaberi vrstu incidenta-</option>
                                 </select>

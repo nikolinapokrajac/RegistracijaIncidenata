@@ -1,10 +1,14 @@
 ﻿
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using paAjmoPokusat.DataAccess.Repository.IRepository;
 using paAjmoPokusat.Models;
+using paAjmoPokusat.Utility;
 
-namespace paAjmoPokusatVol2.Controllers
+namespace paAjmoPokusatVol2.Areas.Admin.Controllers
 {
+    [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class IncidentTypeController : Controller
     {
         //private readonly ApplicationDbContext _db;

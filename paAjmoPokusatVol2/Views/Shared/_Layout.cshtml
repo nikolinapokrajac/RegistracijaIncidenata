@@ -31,24 +31,38 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.min.css
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-item">
-                                    <a class="nav-link text-light" asp-area="" asp-controller="IncidentType" asp-action="Index">Vrsta incidenta</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-light" asp-area="" asp-controller="Municipalitie" asp-action="Index">Opštine</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-light" asp-area="" asp-controller="Incident" asp-action="Index">Incidenti</a>
-                                </li>
-                            </ul>
-                        </li>
+                       @if (User.IsInRole(paAjmoPokusat.Utility.SD.Role_Admin))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Dropdown
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light" asp-area="Admin" asp-controller="IncidentType" asp-action="Index">Vrsta incidenta</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light" asp-area="Admin" asp-controller="Municipalitie" asp-action="Index">Opštine</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light" asp-area="" asp-controller="Incident" asp-action="Index">Incidenti</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                        else if (User.IsInRole(paAjmoPokusat.Utility.SD.Role_Operater))
+                        {
+                            <a class="nav-link text-light" asp-area="" asp-controller="Incident" asp-action="Index">Incidenti</a>
+                        }
+
                     </ul>
                     <partial name="_LoginPartial" />
+@*                     @if (User.IsInRole(paAjmoPokusat.Utility.SD.Role_Admin))
+                    {
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                    </li>
+                    } *@
                 </div>
             </div>
         </nav>

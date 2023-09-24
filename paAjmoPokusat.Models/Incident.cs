@@ -32,5 +32,7 @@ namespace paAjmoPokusat.Models
         [ValidateNever]
 
         public string UserNameOfPersonThatAddedIncident { get; set; }
+
+        public DateTime dateIncident { get; set; }
     }
 }
