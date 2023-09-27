@@ -19,6 +19,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 
+
 var emailConfig = builder.Configuration
         .GetSection("EmailConfiguration")
         .Get<paAjmoPokusat.EmailService.EmailConfiguration>();
@@ -43,6 +44,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -51,6 +53,8 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+//app.MapControllerRoute(
+//    name: "default", pattern: "{controller=Login}/{action=Index}/{id?}");
 app.MapControllerRoute(
     name: "Admin",
        pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");

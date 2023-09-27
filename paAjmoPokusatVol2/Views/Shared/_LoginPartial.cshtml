@@ -24,7 +24,8 @@
     //ovo je dodajem dalje u sl redu
     else
     {
-        <li class="nav-item">
+        @* Context.Response.Redirect("/Identity/Account/Login"); *@
+                <li class="nav-item">
             <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
         </li>
     }
@@ -45,5 +46,11 @@
                 <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
             </li>
         }
+    } *@
+@*     else if (!SignInManager.IsSignedIn(User))
+    {
+    // If we aren't processing a request for the target page,
+    // then redirect to it.
+        Context.Response.Redirect("/Identity/Account/Login"); 
     } *@
 </ul>

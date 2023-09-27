@@ -7,6 +7,7 @@ $(document).ready(function () {
     //populateSelectList1(); // Call function for the first select list
     //populateSelectList2();
     loadDataTable();
+    
     document.querySelector('div.toolbar').innerHTML = '<input type="checkbox" id="chkPovrijedjeneOsobe" />Ima povrijeđenih osoba <br/><input type="checkbox" id="chkStradaleOsobe" />Ima stradalih osoba<br/> <label>Incidenti koji su se desilu u periodu od: </label> <input type="text" id="dateFrom"/> <br/> <label>Incidenti koji su se desilu u periodu do: </label> <input type="text" id="dateTo"/>';
     //$('#chkPovrijedjeneOsobe').change(function () {
     //    console.log('Checkbox changed');
@@ -123,6 +124,9 @@ $(document).ready(function () {
             // Toggle row visibility based on the checkbox state and column value
             if (isChecked && chkPovrOsobe == false && columnValue > 0) {
                 this.nodes().to$().show();
+                //console.log("colona 2");
+                //console.log(column[2].footer());
+                //console.log("kraj kolone dva");
             } else if (isChecked && chkPovrOsobe && columnValue > 0 && columnValue2 > 0) {
                 this.nodes().to$().show();
             }
@@ -235,6 +239,44 @@ $(document).ready(function () {
 
 
 
+
+
+function updateMapWithFilters() {
+    // Get the filtered data from the DataTable
+    console.log(map);
+    var filteredData = dataTable.rows({ search: 'applied' }).data();
+    console.log(filteredData);
+    // Clear existing markers from the map
+    map.eachLayer(function (layer) {
+        if (layer instanceof L.Marker) {
+            map.removeLayer(layer);
+        }
+    });
+
+    // Add new markers based on filtered data
+    filteredData.each(function (row) {
+
+        var lat = parseFloat(row.incidentLatitude).toFixed(6); // Replace with your data
+        var lng = parseFloat(row.incidentLongitude).toFixed(6);
+        console.log(lat, lng);
+        if (lng > 0 && lat > 0) {
+           var marker = L.marker([lat, lng]).addTo(map);
+           // var marker = L.marker([43.823811, 18.357902]).addTo(map);
+            console.log(row.name);
+            // Customize marker and popup as needed
+            console.log("ID opstine:"+row.municipalitie.name);
+            //marker.bindPopup(row.name + " " + row.id + "<br/><a href='/AboutOneIncident/Index?id=" + row.id + "&name=" + row.name + "&description=" + row.description + " &municipalitieName=" + row.municipalitie.name + "'>link ovdje</a>"); // Replace with your data asp-route-id='row.id' asp-controller='AboutOneIncident' asp-action='Index'
+            // &incidentTypeName=" + row.IncidentType.name+"
+            var description = row.description.split("'").join("");
+            var descriptionFinal = description.split('"').join("");
+            console.log(description);
+            marker.bindPopup("Naziv incidenta: " + row.name + "<br>Opština u kojoj se desio incident: " + row.municipalitie.name + "<br>Adresa gdje se desio incident: " + row.incidentAddress + "<br>Vrsta incidenta: " + row.incidentType.name + "<br>Datum i vrijeme kad se desio incident: " + row.dateIncident + "<br>Broj povrijeđenih osoba u incidentu: " + row.injuredPeopleCount + "<br>Broj stradalih osoba u incidentu: " + row.deadPeopleCount + "<br/><a href='/AboutOneIncident/Index?id=" + row.id + "&name=" + row.name + "&description=" + descriptionFinal + " &municipalitieName=" + row.municipalitie.name + "&incidentTypeName=" + row.incidentType.name + "&injuredPeopleCount=" + row.injuredPeopleCount + "&deadPeopleCount=" + row.deadPeopleCount + "&dateOfIncident=" + row.dateIncident + "&incidentAddress=" + row.incidentAddress + "'>Opširnije o incidentu</a>"); // Replace with your data asp-route-id='row.id' asp-controller='AboutOneIncident' asp-action='Index'
+            //marker.bindPopup("Naziv incidenta: " + row.name + '<a class="btn btn - secondary border form - control" asp-controller="Incident" asp-action="Index">Vrati se na početnu stranu</a>');
+            //marker.openPopup(row.name);
+        }
+        //marker.bindPopup("bilo sta");
+    });
+}
 //function populateSelectList1() {
 //    // Access the data for the first select list
 //    var dataForSelectList1 = @Html.Raw(JsonConvert.SerializeObject(paAjmoPokusat.Models.ViewModels.IncidentVM.IncidentTypeList)); // Replace 'DataForSelectList1' with the actual property name containing the data.
@@ -348,22 +390,32 @@ function loadDataTable() {
         //    });
         //}
         //    });
-        initComplete: function () {
+        initComplete: function SelectList() {
             this.api()
-                .columns([2,3]).every(function () {
+                .columns([2, 3]).every(function () {
                     let column = this;
 
                     // Create select element
                     let select = document.createElement('select');
-                    select.add(new Option(''));
+                    console.log("OVO JE ZA KOLONU");
+                    console.log(column);
+                    console.log("SVE");
+                    if (column[0] == 2) {
+                        select.add(new Option('Svi tipovi incidenata'));
+                    }
+                    if (column[0] == 3) {
+                        select.add(new Option('Sve opštine'));
+                    }
+                    //select.add(new Option());
                     column.footer().replaceChildren(select);
+                    
 
                     // Apply listener for user change in value
                     select.addEventListener('change', function () {
                         var val = DataTable.util.escapeRegex(select.value);
 
                         column
-                            .search(val ? '^' + val + '$' : '', true, false)
+                            .search((val === 'Svi tipovi incidenata' || val === 'Sve opštine') ? '' : '^' + val + '$', true, false)
                             .draw();
                     });
 
@@ -375,7 +427,7 @@ function loadDataTable() {
                         .each(function (d, j) {
                             select.add(new Option(d));
                         });
-            });
+                });
 
         }
     });
@@ -395,8 +447,13 @@ function loadDataTable() {
     //        }
     //    });
     //});
-    
+    dataTable.on('draw.dt', function () {
+        console.log("usao za mape");
+        // Update the map based on the current filters
+        updateMapWithFilters();
+    });
     }
+
 
 
 

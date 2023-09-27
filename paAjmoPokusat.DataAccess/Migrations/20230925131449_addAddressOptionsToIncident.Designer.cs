@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using paAjmoPokusat.DataAccess.Data;
 
@@ -11,9 +12,11 @@ using paAjmoPokusat.DataAccess.Data;
 namespace paAjmoPokusat.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230925131449_addAddressOptionsToIncident")]
+    partial class addAddressOptionsToIncident
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -288,8 +291,8 @@ namespace paAjmoPokusat.DataAccess.Migrations
                             DeadPeopleCount = 0,
                             Description = "U 10,50 časova Policijskoj upravi Bijeljina prijavilo je lice D. O. iz Bijeljine, da joj se u Ulici Baje Pivljanina iz putničkog motornog vozila marke ''Golf'', bijele boje, obratilo nepoznato lice, predstavljajući se kao policijski službenik i da je isti tražio da pokaže ličnu kartu. Navedena je tom prilikom, kako je navela, zatražila da joj isti pokaže službenu legitimaciju i da se predstavi kako bi se uvjerila da se radi o policijskom službeniku, nakon čega joj je isti vratio ličnu kartu i udaljio se u nepoznatom pravcu. O događaju je obavješten dežurni tužilac Okružnog javnog tužilaštva Bijeljina koji se izjasnio da se radi  o krivičnom djelu ''Lažno predstavljanje''.",
                             IncidentAddress = "Visoko",
-                            IncidentLatitude = 43.988964000000003,
-                            IncidentLongitude = 18.178795999999998,
+                            IncidentLatitude = 18.178795999999998,
+                            IncidentLongitude = 43.988964000000003,
                             IncidentTypeId = 1,
                             InjuredPeopleCount = 0,
                             MunicipalitieId = 2,
@@ -303,8 +306,8 @@ namespace paAjmoPokusat.DataAccess.Migrations
                             DeadPeopleCount = 2,
                             Description = "Opis 2.incidenta",
                             IncidentAddress = "Dobrinja",
-                            IncidentLatitude = 43.823810999999999,
-                            IncidentLongitude = 18.357901999999999,
+                            IncidentLatitude = 18.357901999999999,
+                            IncidentLongitude = 43.823810999999999,
                             IncidentTypeId = 4,
                             InjuredPeopleCount = 4,
                             MunicipalitieId = 2,
@@ -318,8 +321,8 @@ namespace paAjmoPokusat.DataAccess.Migrations
                             DeadPeopleCount = 1,
                             Description = "Opis 3.incidenta",
                             IncidentAddress = "Grbavica",
-                            IncidentLatitude = 43.851329999999997,
-                            IncidentLongitude = 18.392914000000001,
+                            IncidentLatitude = 18.392914000000001,
+                            IncidentLongitude = 43.851329999999997,
                             IncidentTypeId = 2,
                             InjuredPeopleCount = 7,
                             MunicipalitieId = 1,
@@ -482,18 +485,11 @@ namespace paAjmoPokusat.DataAccess.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PostalCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Role")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("State")

@@ -46,7 +46,22 @@
     </tfoot>
 </table>
 
+<div id="map" style="width: 100%; height: 400px;"></div>
+
 @section Scripts{
     <script src="~/js/incident.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script>
+        var map = L.map('map').setView([44.168115, 17.786531], 8);
+
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        }).addTo(map);
+        
+        </script>
 }
+
 

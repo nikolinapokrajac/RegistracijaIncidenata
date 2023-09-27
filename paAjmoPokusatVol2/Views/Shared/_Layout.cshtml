@@ -25,17 +25,17 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.min.css
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
+@*                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        </li> *@
                        @if (User.IsInRole(paAjmoPokusat.Utility.SD.Role_Admin))
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Dropdown
+                                    Opcije
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item">
@@ -46,6 +46,9 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.min.css
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link text-light" asp-area="" asp-controller="Incident" asp-action="Index">Incidenti</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light" asp-area="Admin" asp-controller="User" asp-action="Index">Pregled korisnika</a>
                                     </li>
                                 </ul>
                             </li>
@@ -76,7 +79,8 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.min.css
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - paAjmoPokusatVol2 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            @* &copy; 2023 - paAjmoPokusatVol2 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> *@
+            Stranica za registrovanje incidenata
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -86,6 +90,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.min.css
     <script src="
 https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.all.min.js
 "></script>
+    <script src="https://cdn.tiny.cloud/1/g28lhnxtlihu4l4a381gw7tz47voznshwbi10lmsvlekrfme/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
