@@ -5,11 +5,13 @@ VisualStudioVersion = 17.7.33913.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "paAjmoPokusatVol2", "paAjmoPokusatVol2\paAjmoPokusatVol2.csproj", "{D58E37C6-04AC-4D05-AB77-F7678E2F0202}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "paAjmoPokusat.DataAccess", "paAjmoPokusat.DataAccess\paAjmoPokusat.DataAccess.csproj", "{8E97DF62-BE66-4E91-B5C7-52E0302AF4F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "paAjmoPokusat.DataAccess", "paAjmoPokusat.DataAccess\paAjmoPokusat.DataAccess.csproj", "{8E97DF62-BE66-4E91-B5C7-52E0302AF4F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "paAjmoPokusat.Models", "paAjmoPokusat.Models\paAjmoPokusat.Models.csproj", "{A05E58F9-FE58-491D-8EDB-8D69B6F638AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "paAjmoPokusat.Models", "paAjmoPokusat.Models\paAjmoPokusat.Models.csproj", "{A05E58F9-FE58-491D-8EDB-8D69B6F638AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "paAjmoPokusat.Utility", "paAjmoPokusat.Utility\paAjmoPokusat.Utility.csproj", "{34F119D3-1CD4-4D2A-A78F-3B18351246A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "paAjmoPokusat.Utility", "paAjmoPokusat.Utility\paAjmoPokusat.Utility.csproj", "{34F119D3-1CD4-4D2A-A78F-3B18351246A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "paAjmoPokusat.EmailService", "paAjmoPokusat.EmailService\paAjmoPokusat.EmailService.csproj", "{5EDBF318-441C-4EA1-BD49-5E65435AE6CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{34F119D3-1CD4-4D2A-A78F-3B18351246A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34F119D3-1CD4-4D2A-A78F-3B18351246A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34F119D3-1CD4-4D2A-A78F-3B18351246A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EDBF318-441C-4EA1-BD49-5E65435AE6CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EDBF318-441C-4EA1-BD49-5E65435AE6CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EDBF318-441C-4EA1-BD49-5E65435AE6CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EDBF318-441C-4EA1-BD49-5E65435AE6CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

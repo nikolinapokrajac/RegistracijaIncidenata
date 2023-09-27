@@ -15,9 +15,27 @@ namespace paAjmoPokusatVol2.Controllers
 
         public IActionResult Index()
         {
-            return View();
-        }
+            // return RedirectToAction("Login");
+            //if (!(User.IsInRole(paAjmoPokusat.Utility.SD.Role_Admin)) || !(User.IsInRole(paAjmoPokusat.Utility.SD.Role_Admin)))
+            //{
+            //    return View("~/Areas/Identity/Pages/Account/Login.cshtml");
 
+            //}
+            //else { return View(); }
+            return View();
+
+        }
+        public IActionResult Login()
+        {
+            return View();
+            //if (!(User.IsInRole(paAjmoPokusat.Utility.SD.Role_Admin)) || !(User.IsInRole(paAjmoPokusat.Utility.SD.Role_Admin)))
+            //{
+            //    return View("~/Areas/Identity/Pages/Account/Login.cshtml");
+
+            //}
+            //else { return View(); }
+
+        }
         public IActionResult Privacy()
         {
             return View();

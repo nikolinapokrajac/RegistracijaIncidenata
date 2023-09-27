@@ -14,6 +14,7 @@ namespace paAjmoPokusat.DataAccess.Repository
         public IIncidentRepository Incident { get; private set; }
 
         public IIncidentImageRepository IncidentImage { get; private set; }
+        public IApplicationUserRepository ApplicationUser { get; private set; }
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
@@ -21,6 +22,7 @@ namespace paAjmoPokusat.DataAccess.Repository
             Municipalitie = new MunicipalitieRepository(_db);
             Incident = new IncidentRepository(_db);
             IncidentImage = new IncidentImageRepository(_db);
+            ApplicationUser = new ApplicationUserRepository(_db);
         }
         public void Save()
         {

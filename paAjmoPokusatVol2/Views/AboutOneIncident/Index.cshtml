@@ -1,0 +1,39 @@
+﻿@* @model IncidentVM *@
+<h1>Prozor</h1>
+@* <label>@Model.Incident.Name</label> *@
+<script>
+    // Function to get query parameters from the URL
+    function getQueryParam(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
+    // Get the 'id' and 'name' parameters from the query string
+    const id = getQueryParam('id');
+    const name = getQueryParam('name');
+    const description = getQueryParam('description');
+    const municipalitieName = getQueryParam('municipalitieName');
+    const incidentTypeName = getQueryParam('incidentTypeName');
+    const injuredPeopleCount = getQueryParam('injuredPeopleCount');
+    const deadPeopleCount = getQueryParam('deadPeopleCount');
+    const dateOfIncident = getQueryParam('dateOfIncident');
+    const incidentAddress = getQueryParam('incidentAddress');
+    // Now you can use 'id' and 'name' as needed in your JavaScript code
+    console.log(`ID: ${id}, Name: ${name}`);
+    //document.body.innerHTML = `<h1>ID: ${id}, Name: ${name}</h1>`;
+    document.body.innerHTML = 
+    `<h1>Naziv incidenta: ${name}</h1><br/>
+    <label>Opis incidenta: ${description}</label><br/>
+                <label>Opština u kojoj se desio incident: ${municipalitieName}</label><br/>
+                    <label>Adresa gdje se desio incident: ${incidentAddress}</label><br/>
+                    <label>Vrsta incidenta: ${incidentTypeName}</label><br/>
+                            <label>Broj povrijeđenih osoba u incidentu: ${injuredPeopleCount}</label><br/>
+                                    <label>Broj stradalih osoba u incidentu: ${deadPeopleCount}</label><br/>
+                                    <label>Datum i vrijeme kada se desio incident: ${dateOfIncident}</label><br/>
+                                    <a href="/Incident/Index">Povratak na prethodnu stranicu</a>
+                                            
+            
+            
+            `;
+    </script>
+    <br/>

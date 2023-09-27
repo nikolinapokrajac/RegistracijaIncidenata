@@ -29,5 +29,16 @@ namespace paAjmoPokusat.Models
         public Municipalitie Municipalitie { get; set; }
         [ValidateNever]
         public List<IncidentImage> IncidentImages { get; set; }
+        [ValidateNever]
+
+        public string UserNameOfPersonThatAddedIncident { get; set; }
+        [DisplayName("Datum i vrijeme kada se desio incident")]
+        public DateTime dateIncident { get; set; }
+        [DisplayName("Adresa gdje se desio incident")]
+        public string IncidentAddress { get; set; }
+        [DisplayName("Geografska dužina")]
+        public double IncidentLongitude { get; set; }
+        [DisplayName("Geografska širina")]
+        public double IncidentLatitude { get; set; }
     }
 }

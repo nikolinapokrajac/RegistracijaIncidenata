@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using paAjmoPokusat.DataAccess.Repository.IRepository;
 using paAjmoPokusat.Models;
@@ -9,19 +8,10 @@ namespace paAjmoPokusatVol2.Controllers
 {
     public class IncidentController : Controller
     {
-        //private readonly ApplicationDbContext _db;
-        //private readonly IIncidentRepository _incidentRepo; //ovo brisem kada dodam UnitOfWork a dodajem dole
+
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        // private readonly IWebHostEnvironment _webHostEnvironment;//ovo bih imala da imam sliku i imala bih dodatan kod za brisanje slike dole
-        /* public IncidentController(ApplicationDbContext db)
-         {
-             _db = db;
-         }*/
-        /*public IncidentController(IIncidentRepository incidentRepo)
-        {
-            _incidentRepo = incidentRepo;
-        }*/
+
 
         public IncidentController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
@@ -31,87 +21,13 @@ namespace paAjmoPokusatVol2.Controllers
 
         public IActionResult Index()
         {
-            //List<Incident> objIncidentList = _db.Incidents.ToList();
-            //List<Incident> objIncidentList = _incidentRepo.GetAll().ToList(); //ovdje dodali UnitOfWork
-            List<Incident> objIncidentList = _unitOfWork.Incident.GetAll(includeProperties: "IncidentType,Municipalitie").ToList();
+
+            List<Incident> objIncidentList = null;
+
             return View(objIncidentList);
         }
 
-        /*
-        public IActionResult Create()
-        {
-            IncidentVM incidentVM = new() { Incident = new Incident(), IncidentTypeList = _unitOfWork.IncidentType.GetAll().Select(u => new SelectListItem { Text = u.Name, Value = u.Id.ToString() }), MunicipalitieList = _unitOfWork.Municipalitie.GetAll().Select(u => new SelectListItem { Text = u.Name, Value = u.Id.ToString() }) };
-            return View(incidentVM);
-        }
-        [HttpPost]
-        public IActionResult Create(IncidentVM incidentVM)
-        {
-            if (ModelState.IsValid)
-            {
-                //_db.Incidents.Add(obj);
-                //_db.SaveChanges();
-                //_incidentRepo.Add(obj);//ovdje dodali UnitOfWork
-                //_incidentRepo.Save();
-                _unitOfWork.Incident.Add(incidentVM.Incident);
-                _unitOfWork.Save();
-                TempData["success"] = "Uspješno dodana nova vrsta incidenta";
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                incidentVM.IncidentTypeList = _unitOfWork.IncidentType.GetAll().Select(u => new SelectListItem { Text = u.Name, Value = u.Id.ToString() });
-                incidentVM.MunicipalitieList = _unitOfWork.Municipalitie.GetAll().Select(u => new SelectListItem { Text = u.Name, Value = u.Id.ToString() });
-                return View(incidentVM);
-            }
-        }
 
-        /*
-        public IActionResult Create(Incident obj)
-        {
-            if (obj.Name.Length > 50)
-                ModelState.AddModelError("name", "Dužina polja ne smije biti veća od 50 karaktera.");
-            if (ModelState.IsValid)
-            {
-                //_db.Incidents.Add(obj);
-                //_db.SaveChanges();
-                //_incidentRepo.Add(obj);//ovdje dodali UnitOfWork
-                //_incidentRepo.Save();
-                _unitOfWork.Incident.Add(obj);
-                _unitOfWork.Save();
-                TempData["success"] = "Uspješno dodana nova vrsta incidenta";
-                return RedirectToAction("Index");
-            }
-            return View(obj);
-        }//ovdje je bio zatvoren komentar ali kad smo ubacivali da imamo samo upsert morali smo to zatvaranje koje izgleda kao na kraju ovoga reda da premjestimo   //tako eto
-
-        public IActionResult Edit(int? id)
-        {
-            if (id == null || id == 0)
-                return NotFound();
-            //Incident? incidentFromDb = _db.Incidents.FirstOrDefault(x => x.Id == id);
-            //Incident? incidentFromDb = _incidentRepo.Get(x => x.Id == id);//ovdje dodali UnitOfWork
-            Incident? incidentFromDb = _unitOfWork.Incident.Get(x => x.Id == id);
-            if (incidentFromDb == null)
-                return NotFound();
-            return View(incidentFromDb);
-        }
-        [HttpPost]
-        public IActionResult Edit(Incident obj)
-        {
-            if (ModelState.IsValid)
-            {
-                //_db.Incidents.Update(obj);
-                //_db.SaveChanges();
-                //_incidentRepo.Update(obj);//ovdje dodali UnitOfWork
-                //_incidentRepo.Save();
-                _unitOfWork.Incident.Update(obj);
-                _unitOfWork.Save();
-                TempData["success"] = "Uspješno ažurirana postojeća vrsta incidenta";
-                return RedirectToAction("Index");
-            }
-            return View();
-        }
-        */
 
         public IActionResult Upsert(int? id)
         {
@@ -123,6 +39,7 @@ namespace paAjmoPokusatVol2.Controllers
             };
             if (id == null || id == 0)
             {
+
                 return View(incidentVM);
             }
             else
@@ -136,18 +53,20 @@ namespace paAjmoPokusatVol2.Controllers
 
         public IActionResult Upsert(IncidentVM incidentVM, List<IFormFile> files)
         {
-            //TempData["success"] = "Uspješno";
+            incidentVM.Incident.UserNameOfPersonThatAddedIncident = User.Identity.Name.ToString();
+
             if (ModelState.IsValid)
             {
                 if (incidentVM.Incident.Id == 0)
                 {
+
                     _unitOfWork.Incident.Add(incidentVM.Incident);
-                    //TempData["success"] += " dodan novi ";
+
                 }
                 else
                 {
                     _unitOfWork.Incident.Update(incidentVM.Incident);
-                    //TempData["success"] += " uređen postojeći ";
+
                 }
 
                 _unitOfWork.Save();
@@ -193,37 +112,7 @@ namespace paAjmoPokusatVol2.Controllers
             }
 
         }
-        /*
-        public IActionResult Delete(int? id)
-        {
-            if (id == null || id == 0)
-                return NotFound();
-            //Incident? incidentFromDb = _db.Incidents.FirstOrDefault(x => x.Id == id);
-            //Incident? incidentFromDb = _incidentRepo.Get(x => x.Id == id);
-            Incident? incidentFromDb = _unitOfWork.Incident.Get(x => x.Id == id);
-            if (incidentFromDb == null)
-                return NotFound();
-            return View(incidentFromDb);
-        }*/
-        /* [HttpPost, ActionName("Delete")]
-         public IActionResult DeletePOST(int? id)
-         {
-             // Incident? obj = _db.Incidents.FirstOrDefault(x => x.Id == id);
-             //Incident? obj = _incidentRepo.Get(x => x.Id == id);
-             Incident? obj = _unitOfWork.Incident.Get(x => x.Id == id);
-             if (obj == null)
-             {
-                 return NotFound();
-             }
-             //_db.Incidents.Remove(obj);
-             //_db.SaveChanges();
-             //_incidentRepo.Remove(obj);
-             //_incidentRepo.Save();
-             _unitOfWork.Incident.Remove(obj);
-             _unitOfWork.Save();
-             return RedirectToAction("Index");
-         }
-         */
+
 
         public IActionResult DeleteImage(int imageId)
         {
@@ -250,7 +139,18 @@ namespace paAjmoPokusatVol2.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Incident> objIncidentList = _unitOfWork.Incident.GetAll(includeProperties: "IncidentType,Municipalitie").ToList();
+
+
+            List<Incident> objIncidentList = null;
+
+            if (User.IsInRole(paAjmoPokusat.Utility.SD.Role_Operater))
+            {
+                objIncidentList = _unitOfWork.Incident.GetAll(i => i.UserNameOfPersonThatAddedIncident == User.Identity.Name, includeProperties: "IncidentType,Municipalitie").ToList();
+            }
+            else if (User.IsInRole(paAjmoPokusat.Utility.SD.Role_Admin))
+            {
+                objIncidentList = _unitOfWork.Incident.GetAll(includeProperties: "IncidentType,Municipalitie").ToList();
+            }
             Console.WriteLine(objIncidentList.Count);
             return Json(new { data = objIncidentList });
         }
@@ -278,6 +178,8 @@ namespace paAjmoPokusatVol2.Controllers
 
             return Json(new { success = true, message = "Uspješno obrisan incident" });
         }
+
         #endregion
     }
 }
+

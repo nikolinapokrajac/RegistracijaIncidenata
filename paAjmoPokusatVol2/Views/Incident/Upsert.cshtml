@@ -12,6 +12,7 @@
         <div class="card-body p-4">
             <form method="post" class="=row" enctype="multipart/form-data">
                 <input asp-for="Incident.Id" hidden />
+                <input asp-for="Incident.IncidentImages" hidden />
                 <div class="row">
                     <div class="col-10">
                         <div class="border p-3">
@@ -20,10 +21,12 @@
                                 <input asp-for="Incident.Name" class="form-control border-0 shadow" />
                                 <span asp-validation-for="Incident.Name" class="text-danger"></span>
                             </div>
-                            <div class="form-floating col-12 py-2">
-                                <label asp-for="Incident.Description" class="ns-2"></label>
-                                <input asp-for="Incident.Description" class="form-control border-0 shadow" />
+                            <div class=" col-12 py-2">
                                 <span asp-validation-for="Incident.Description" class="text-danger"></span>
+                                <label asp-for="Incident.Description" class="ns-2 text-muted"></label>
+                                @* <input asp-for="Incident.Description" class="form-control border-0 shadow" /> *@
+                                <textarea asp-for="Incident.Description" class="form-control border-0 shadow"></textarea>
+                                
                             </div>
                             <div class="form-floating col-12 py-2">
                                 <label asp-for="Incident.InjuredPeopleCount" class="ns-2"></label>
@@ -33,6 +36,24 @@
                                 <label asp-for="Incident.DeadPeopleCount" class="ns-2"></label>
                                 <input asp-for="Incident.DeadPeopleCount" class="form-control border-0 shadow" />
                             </div>
+                            <div class="form-floating col-12 py-2">
+                                <label asp-for="Incident.dateIncident" class="ns-2"></label>
+                                <input asp-for="Incident.dateIncident" class="form-control border-0 shadow" />
+                            </div>
+                            <div class="form-floating col-12 py-2">
+                                <label asp-for="Incident.IncidentAddress" class="ns-2"></label>
+                                <input asp-for="Incident.IncidentAddress" class="form-control border-0 shadow" />
+                            </div>
+                            <div >
+                                <label>Unesite koordinate</label></div>
+                                <div class="form-floating col-12 py-2">
+                                <label asp-for="Incident.IncidentLatitude" class="ns-2"></label>
+                                    <input asp-for="Incident.IncidentLatitude" class="form-control border-0 shadow" />
+                            </div>
+                                <div class="form-floating col-12 py-2">
+                                    <label asp-for="Incident.IncidentLongitude" class="ns-2"></label>
+                                    <input asp-for="Incident.IncidentLongitude" class="form-control border-0 shadow" />
+                                </div>
                             <div class="form-floating col-12 py-2">
                                 <select asp-for="@Model.Incident.IncidentTypeId" asp-items="@Model.IncidentTypeList" class="form-select border-0 shadow">
                                     <option disabled selected>-Odaberi vrstu incidenta-</option>
@@ -52,12 +73,14 @@
                             <div class="row">
                                 <div class="col-6 col-md-3">
                                     @*<button type="submit" class="btn btn-primary form-control">Dodaj novi incident</button>*@
-                                    @if (Model.Incident.Id != 0)
-                                    {
+                                    @if (Model.Incident.Id != 0){
                                         <button type="submit" class="btn btn-primary form-control">Uredi postojeći incident</button>
                                     }
                                     else
                                     {
+                                        
+                                            Model.Incident.UserNameOfPersonThatAddedIncident = User.Identity.Name.ToString();
+                                        
                                         <button type="submit" class="btn btn-primary form-control">Dodaj novi incident</button>
                                     }
                                 </div>
@@ -92,6 +115,13 @@
 
 
 @section Scripts{
+        <script>
+            tinymce.init({
+                selector: 'textarea',
+                plugins: 'anchor autolink charmap codesample emoticons  lists   table visualblocks wordcount',
+                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough |  align lineheight | numlist bullist indent outdent',
+            });
+        </script>
     @{
         <partial name="_ValidationScriptsPartial" />
     }

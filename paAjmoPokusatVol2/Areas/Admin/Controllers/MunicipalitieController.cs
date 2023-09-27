@@ -1,23 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using paAjmoPokusat.DataAccess.Repository.IRepository;
 using paAjmoPokusat.Models;
+using paAjmoPokusat.Utility;
 
-namespace paAjmoPokusatVol2.Controllers
+namespace paAjmoPokusatVol2.Areas.Admin.Controllers
 {
+    [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class MunicipalitieController : Controller
     {
-        //private readonly ApplicationDbContext _db;
-        //private readonly IMunicipalitieRepository _municipalitieRepo; //ovo brisem kada dodam UnitOfWork a dodajem dole
+
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        /* public MunicipalitieController(ApplicationDbContext db)
-         {
-             _db = db;
-         }*/
-        /*public MunicipalitieController(IMunicipalitieRepository municipalitieRepo)
-        {
-            _municipalitieRepo = municipalitieRepo;
-        }*/
 
         public MunicipalitieController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
@@ -26,8 +21,7 @@ namespace paAjmoPokusatVol2.Controllers
         }
         public IActionResult Index()
         {
-            //List<Municipalitie> objMunicipalitieList = _db.Municipalities.ToList();
-            //List<Municipalitie> objMunicipalitieList = _municipalitieRepo.GetAll().ToList(); //ovdje dodali UnitOfWork
+
             List<Municipalitie> objMunicipalitieList = _unitOfWork.Municipalitie.GetAll().ToList();
             return View(objMunicipalitieList);
         }
@@ -54,10 +48,7 @@ namespace paAjmoPokusatVol2.Controllers
                     }
                     obj.UrlImage = @"\images\municipalitie\" + fileName;
                 }
-                //_db.Municipalities.Add(obj);
-                //_db.SaveChanges();
-                //_municipalitieRepo.Add(obj);//ovdje dodali UnitOfWork
-                //_municipalitieRepo.Save();
+
                 _unitOfWork.Municipalitie.Add(obj);
                 _unitOfWork.Save();
                 TempData["success"] = "Uspješno dodana nova vrsta incidenta";
@@ -70,8 +61,7 @@ namespace paAjmoPokusatVol2.Controllers
         {
             if (id == null || id == 0)
                 return NotFound();
-            //Municipalitie? municipalitieFromDb = _db.Municipalities.FirstOrDefault(x => x.Id == id);
-            //Municipalitie? municipalitieFromDb = _municipalitieRepo.Get(x => x.Id == id);//ovdje dodali UnitOfWork
+
             Municipalitie? municipalitieFromDb = _unitOfWork.Municipalitie.Get(x => x.Id == id);
             if (municipalitieFromDb == null)
                 return NotFound();
@@ -90,11 +80,14 @@ namespace paAjmoPokusatVol2.Controllers
                     string municipalitieTypePath = Path.Combine(wwwRootPath, @"images\municipalitie");
                     if (!string.IsNullOrEmpty(municipalitieTypePath))
                     {
-                        //delete the old image
-                        var oldImagePath = Path.Combine(wwwRootPath, obj.UrlImage.TrimStart('\\'));
-                        if (System.IO.File.Exists(oldImagePath))
+
+                        if (obj.UrlImage != null)
                         {
-                            System.IO.File.Delete(oldImagePath);
+                            var oldImagePath = Path.Combine(wwwRootPath, obj.UrlImage.TrimStart('\\'));
+                            if (System.IO.File.Exists(oldImagePath))
+                            {
+                                System.IO.File.Delete(oldImagePath);
+                            }
                         }
                     }
                     using (var fileStream = new FileStream(Path.Combine(municipalitieTypePath, fileName), FileMode.Create))
@@ -103,10 +96,7 @@ namespace paAjmoPokusatVol2.Controllers
                     }
                     obj.UrlImage = @"\images\municipalitie\" + fileName;
                 }
-                //_db.Municipalities.Update(obj);
-                //_db.SaveChanges();
-                //_municipalitieRepo.Update(obj);//ovdje dodali UnitOfWork
-                //_municipalitieRepo.Save();
+
                 _unitOfWork.Municipalitie.Update(obj);
                 _unitOfWork.Save();
                 TempData["success"] = "Uspješno ažurirana postojeća vrsta incidenta";
@@ -119,8 +109,7 @@ namespace paAjmoPokusatVol2.Controllers
         {
             if (id == null || id == 0)
                 return NotFound();
-            //Municipalitie? municipalitieFromDb = _db.Municipalities.FirstOrDefault(x => x.Id == id);
-            //Municipalitie? municipalitieFromDb = _municipalitieRepo.Get(x => x.Id == id);
+
             Municipalitie? municipalitieFromDb = _unitOfWork.Municipalitie.Get(x => x.Id == id);
             if (municipalitieFromDb == null)
                 return NotFound();
@@ -129,17 +118,11 @@ namespace paAjmoPokusatVol2.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePOST(int? id)
         {
-            // Municipalitie? obj = _db.Municipalities.FirstOrDefault(x => x.Id == id);
-            //Municipalitie? obj = _municipalitieRepo.Get(x => x.Id == id);
             Municipalitie? obj = _unitOfWork.Municipalitie.Get(x => x.Id == id);
             if (obj == null)
             {
                 return NotFound();
             }
-            //_db.Municipalities.Remove(obj);
-            //_db.SaveChanges();
-            //_municipalitieRepo.Remove(obj);
-            //_municipalitieRepo.Save();
             _unitOfWork.Municipalitie.Remove(obj);
             _unitOfWork.Save();
             return RedirectToAction("Index");
