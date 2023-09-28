@@ -1,0 +1,68 @@
+﻿@using RegistrovanjeIncidenata.Models;
+@model IncidentType
+<h2>@( Model.Id!= 0 ? "Uredi postojeću" : "Dodaj novu") vrstu incidenta</h2>
+
+<form method="post" class="=row" enctype="multipart/form-data">
+    <input asp-for="Id" hidden />
+    <input asp-for="ImageUrl" hidden />
+    <div class="border p-3">
+        <div class="row pb-2">
+            </hr>
+        </div>
+        <div class="row">
+        <div class="col-10">        
+            <div class="form-floating col-12 py-2">
+            <label asp-for="Name" class="ns-2"></label>
+            <input asp-for="Name" class="form-control border-0 shadow" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+                <div class=" col-12 py-2">
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                    <label asp-for="Description" class="ns-2 text-muted"></label>
+                    @* <input asp-for="Incident.Description" class="form-control border-0 shadow" /> *@
+                    <textarea asp-for="Description" class="form-control border-0 shadow"></textarea>
+
+                </div>
+        <div class="form-floating col-12 py-2">
+            <label asp-for="ImageUrl" class="ns-2"></label>
+            <input type="file" name="file" class="form-control border-0 shadow" />
+        </div>
+        <div class="row">
+            <div class="col-6 col-md-3">
+                @*<button type="submit" class="btn btn-primary form-control">Dodaj novi tip incidenta</button>*@
+                
+                @if (Model.Id != 0)
+                {
+                    <button type="submit" class="btn btn-primary form-control">Uredi postojeću vrstu incidenta</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-primary form-control">Dodaj novu vrstu incidenta</button>
+                }
+            </div>
+            <div class="col-6 col-md-3">
+                <a class="btn btn-secondary border form-control" asp-controller="IncidentType" asp-action="Index">Vrati se na početnu stranu</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-2">
+        <img src="@Model.ImageUrl" width="100%" />
+        </div>
+    </div>
+    </div>
+</form>
+
+
+@section Scripts{
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'anchor autolink charmap codesample emoticons  lists   table visualblocks wordcount',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough |  align lineheight | numlist bullist indent outdent',
+        });
+    </script>
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+            }

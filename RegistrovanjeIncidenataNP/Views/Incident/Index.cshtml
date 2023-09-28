@@ -1,0 +1,68 @@
+﻿@using RegistrovanjeIncidenata.Models;
+@model List<Incident>
+<h1>@User.Identity.Name</h1>
+<h2>Lista incidenata</h2>
+<a asp-controller="Incident" asp-action="Upsert" class="btn btn-primary"><i class="bi bi-plus-square-fill"></i>  Dodaj incident</a>
+<table id="tblData" class="table-bordered table table-striped" style="border:1px solid blue;border-collapse: collapse; width:100%">
+    <thead>
+        <tr style="border: 1px solid blue;">
+            @*<th style="border: 1px solid blue;">ID</th>*@
+            <th style="border: 1px solid blue;">Naziv incidenta</th>
+            <th style="border: 1px solid blue;">Kratki opis incidenta</th>
+            <th style="border: 1px solid blue;">Naziv vrste incidenta</th>
+            <th style="border: 1px solid blue;">Naziv opštine u kojoj se desio incident</th>
+            <th style="border: 1px solid blue;">Datum kada se desio incident</th> 
+            <th style="border: 1px solid blue;">Broj povrijeđenih osoba</th>
+            <th style="border: 1px solid blue;">Broj poginulih osoba</th>
+            <th></th>
+        </tr>
+    </thead>
+ @* <tbody>
+        @foreach(var obj in Model)
+        {
+            <tr style="border: 1px solid blue;">
+                <td style="border: 1px solid blue;">@obj.Id</td>
+                <td style="border: 1px solid blue;">@obj.Name</td>
+                <td style="border: 1px solid blue;">@obj.Description</td>
+                <td>
+                    <a asp-route-id="@obj.Id" asp-controller="Incident" asp-action="Upsert" class="btn btn-secondary"><i class="bi bi-pen-fill"></i> Uredi</a>
+                </td>
+                <td>
+                    <a asp-route-id="@obj.Id" asp-controller="Incident" asp-action="Delete" class="btn btn-secondary"><i class="bi bi-trash3-fill"></i> Obriši</a>
+                </td>
+            </tr>
+        }
+    </tbody>*@
+    <tfoot>
+        <tr>
+            <th></th>
+            <th></th>
+            <th>Naziv vrste incidenta</th>
+            <th>Naziv opstine u kojoj se desio incident</th>
+            <th></th>
+            <th></th>
+            <th></th>
+
+        </tr>
+    </tfoot>
+</table>
+
+<div id="map" style="width: 100%; height: 400px;"></div>
+
+@section Scripts{
+    <script src="~/js/incident.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script>
+        var map = L.map('map').setView([44.168115, 17.786531], 8);
+
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        }).addTo(map);
+        
+        </script>
+}
+
+

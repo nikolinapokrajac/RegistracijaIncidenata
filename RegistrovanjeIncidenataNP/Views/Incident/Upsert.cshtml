@@ -1,0 +1,130 @@
+﻿@using RegistrovanjeIncidenata.Models.ViewModels;
+
+@model IncidentVM
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2>@(Model.Incident.Id != 0 ? "Uredi postojeći" : "Dodaj novi") incident</h2>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-4">
+            <form method="post" class="=row" enctype="multipart/form-data">
+                <input asp-for="Incident.Id" hidden />
+                <input asp-for="Incident.IncidentImages" hidden />
+                <div class="row">
+                    <div class="col-10">
+                        <div class="border p-3">
+                            <div class="form-floating col-12 py-2">
+                                <label asp-for="Incident.Name" class="ns-2"></label>
+                                <input asp-for="Incident.Name" class="form-control border-0 shadow" />
+                                <span asp-validation-for="Incident.Name" class="text-danger"></span>
+                            </div>
+                            <div class=" col-12 py-2">
+                                <span asp-validation-for="Incident.Description" class="text-danger"></span>
+                                <label asp-for="Incident.Description" class="ns-2 text-muted"></label>
+                                @* <input asp-for="Incident.Description" class="form-control border-0 shadow" /> *@
+                                <textarea asp-for="Incident.Description" class="form-control border-0 shadow"></textarea>
+                                
+                            </div>
+                            <div class="form-floating col-12 py-2">
+                                <label asp-for="Incident.InjuredPeopleCount" class="ns-2"></label>
+                                <input asp-for="Incident.InjuredPeopleCount" class="form-control border-0 shadow" />
+                            </div>
+                            <div class="form-floating col-12 py-2">
+                                <label asp-for="Incident.DeadPeopleCount" class="ns-2"></label>
+                                <input asp-for="Incident.DeadPeopleCount" class="form-control border-0 shadow" />
+                            </div>
+                            <div class="form-floating col-12 py-2">
+                                <label asp-for="Incident.dateIncident" class="ns-2"></label>
+                                <input asp-for="Incident.dateIncident" class="form-control border-0 shadow" />
+                            </div>
+                            <div class="form-floating col-12 py-2">
+                                <label asp-for="Incident.IncidentAddress" class="ns-2"></label>
+                                <input asp-for="Incident.IncidentAddress" class="form-control border-0 shadow" />
+                            </div>
+                            <div >
+                                <label>Unesite koordinate</label></div>
+                                <div class="form-floating col-12 py-2">
+                                <label asp-for="Incident.IncidentLatitude" class="ns-2"></label>
+                                    <input asp-for="Incident.IncidentLatitude" class="form-control border-0 shadow" />
+                            </div>
+                                <div class="form-floating col-12 py-2">
+                                    <label asp-for="Incident.IncidentLongitude" class="ns-2"></label>
+                                    <input asp-for="Incident.IncidentLongitude" class="form-control border-0 shadow" />
+                                </div>
+                            <div class="form-floating col-12 py-2">
+                                <select asp-for="@Model.Incident.IncidentTypeId" asp-items="@Model.IncidentTypeList" class="form-select border-0 shadow">
+                                    <option disabled selected>-Odaberi vrstu incidenta-</option>
+                                </select>
+                                <label asp-for="Incident.IncidentTypeId" class="ms-2"></label>
+                            </div>
+                            <div class="form-floating col-12 py-2">
+                                <select asp-for="@Model.Incident.MunicipalitieId" asp-items="@Model.MunicipalitieList" class="form-select border-0 shadow">
+                                    <option disabled selected>-Odaberi opštinu-</option>
+                                </select>
+                                <label asp-for="Incident.IncidentTypeId" class="ms-2"></label>
+                            </div>
+                            <div class="form-floating py-2 col-12">
+                                <input type="file" name="files" class="form-control border-0 shadow" multiple />
+                                <label asp-for="Incident.IncidentImages" class="ms-2"></label>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 col-md-3">
+                                    @*<button type="submit" class="btn btn-primary form-control">Dodaj novi incident</button>*@
+                                    @if (Model.Incident.Id != 0){
+                                        <button type="submit" class="btn btn-primary form-control">Uredi postojeći incident</button>
+                                    }
+                                    else
+                                    {
+                                        
+                                            Model.Incident.UserNameOfPersonThatAddedIncident = User.Identity.Name.ToString();
+                                        
+                                        <button type="submit" class="btn btn-primary form-control">Dodaj novi incident</button>
+                                    }
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <a class="btn btn-secondary border form-control" asp-controller="Incident" asp-action="Index">Vrati se na početnu stranu</a>
+                                </div>
+        </div>
+    </div>
+</div>
+                    <div class="col-2">
+                        @if (Model.Incident.IncidentImages != null)
+                        {
+                            foreach (var image in Model.Incident.IncidentImages)
+                            {
+                                <div class="border p-1 m-2 text-center">
+                                    <img src="@image.ImageUrl" width="100%"
+                                         style="border-radius:5px; border:1px solid #bbb9b9" />
+                                    <a asp-action="DeleteImage" class="btn btn-danger" asp-route-imageId="@image.Id">
+                                        <i class="bi bi-trash-fill"></i> Delete
+                                    </a>
+                                </div>
+                            }
+                        }
+                        </div>
+                        </div>
+                        </form>
+                        </div>
+                        </div>
+
+
+
+
+
+@section Scripts{
+        <script>
+            tinymce.init({
+                selector: 'textarea',
+                plugins: 'anchor autolink charmap codesample emoticons  lists   table visualblocks wordcount',
+                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough |  align lineheight | numlist bullist indent outdent',
+            });
+        </script>
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+            }
