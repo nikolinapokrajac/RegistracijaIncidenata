@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace paAjmoPokusat.DataAccess.Migrations
+namespace RegistrovanjeIncidenata.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class addDateIncident : Migration

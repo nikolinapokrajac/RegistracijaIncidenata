@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using paAjmoPokusat.DataAccess.Repository.IRepository;
-using paAjmoPokusat.Models;
-using paAjmoPokusat.Models.ViewModels;
+using RegistrovanjeIncidenata.DataAccess.Repository.IRepository;
+using RegistrovanjeIncidenata.Models;
+using RegistrovanjeIncidenata.Models.ViewModels;
 
-namespace paAjmoPokusatVol2.Controllers
+namespace RegistrovanjeIncidenataNP.Controllers
 {
     public class AboutOneIncidentController : Controller
     {

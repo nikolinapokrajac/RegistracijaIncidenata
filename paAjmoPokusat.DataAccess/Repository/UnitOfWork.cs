@@ -1,7 +1,7 @@
-﻿using paAjmoPokusat.DataAccess.Data;
-using paAjmoPokusat.DataAccess.Repository.IRepository;
+﻿using RegistrovanjeIncidenata.DataAccess.Data;
+using RegistrovanjeIncidenata.DataAccess.Repository.IRepository;
 
-namespace paAjmoPokusat.DataAccess.Repository
+namespace RegistrovanjeIncidenata.DataAccess.Repository
 {
     public class UnitOfWork : IUnitOfWork
     {

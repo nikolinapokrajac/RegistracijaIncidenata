@@ -1,4 +1,4 @@
-namespace paAjmoPokusat.Models
+namespace RegistrovanjeIncidenata.Models
 {
     public class ErrorViewModel
     {

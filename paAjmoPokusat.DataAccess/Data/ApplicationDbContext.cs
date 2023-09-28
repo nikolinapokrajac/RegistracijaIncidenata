@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using paAjmoPokusat.Models;
+using RegistrovanjeIncidenata.Models;
 
-namespace paAjmoPokusat.DataAccess.Data
+namespace RegistrovanjeIncidenata.DataAccess.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {

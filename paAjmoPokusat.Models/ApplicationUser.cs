@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace paAjmoPokusat.Models
+namespace RegistrovanjeIncidenata.Models
 {
     public class ApplicationUser : IdentityUser
     {

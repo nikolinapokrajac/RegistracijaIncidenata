@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using paAjmoPokusat.DataAccess.Data;
+using RegistrovanjeIncidenata.DataAccess.Data;
 
 #nullable disable
 
-namespace paAjmoPokusat.DataAccess.Migrations
+namespace RegistrovanjeIncidenata.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20230917164133_ExtendIdentityUser")]

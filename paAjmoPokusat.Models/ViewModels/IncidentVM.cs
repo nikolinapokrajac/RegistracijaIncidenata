@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace paAjmoPokusat.Models.ViewModels
+namespace RegistrovanjeIncidenata.Models.ViewModels
 {
     public class IncidentVM
     {

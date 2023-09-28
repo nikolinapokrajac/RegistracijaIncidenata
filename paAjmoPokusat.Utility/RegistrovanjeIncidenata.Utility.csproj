@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\paAjmoPokusat.EmailService\paAjmoPokusat.EmailService.csproj" />
+    <ProjectReference Include="..\paAjmoPokusat.EmailService\RegistrovanjeIncidenata.EmailService.csproj" />
   </ItemGroup>
 
 </Project>

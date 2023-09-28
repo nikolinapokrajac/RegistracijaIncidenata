@@ -1,8 +1,8 @@
-﻿using paAjmoPokusat.DataAccess.Data;
-using paAjmoPokusat.DataAccess.Repository.IRepository;
-using paAjmoPokusat.Models;
+﻿using RegistrovanjeIncidenata.DataAccess.Data;
+using RegistrovanjeIncidenata.DataAccess.Repository.IRepository;
+using RegistrovanjeIncidenata.Models;
 
-namespace paAjmoPokusat.DataAccess.Repository
+namespace RegistrovanjeIncidenata.DataAccess.Repository
 {
     public class IncidentImageRepository : Repository<IncidentImage>, IIncidentImageRepository
     {

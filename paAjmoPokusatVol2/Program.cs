@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
-using paAjmoPokusat.DataAccess.Data;
-using paAjmoPokusat.DataAccess.Repository;
-using paAjmoPokusat.DataAccess.Repository.IRepository;
-using paAjmoPokusat.Utility;
+using RegistrovanjeIncidenata.DataAccess.Data;
+using RegistrovanjeIncidenata.DataAccess.Repository;
+using RegistrovanjeIncidenata.DataAccess.Repository.IRepository;
+using RegistrovanjeIncidenata.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +22,7 @@ builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 var emailConfig = builder.Configuration
         .GetSection("EmailConfiguration")
-        .Get<paAjmoPokusat.EmailService.EmailConfiguration>();
+        .Get<RegistrovanjeIncidenata.EmailService.EmailConfiguration>();
 builder.Services.AddSingleton(emailConfig);
 //builder.Services.AddAuthentication().AddGoogleOpenIdConnect(options =>
 //{

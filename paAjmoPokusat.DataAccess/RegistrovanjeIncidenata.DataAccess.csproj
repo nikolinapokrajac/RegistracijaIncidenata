@@ -17,8 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\paAjmoPokusat.Models\paAjmoPokusat.Models.csproj" />
-    <ProjectReference Include="..\paAjmoPokusat.Utility\paAjmoPokusat.Utility.csproj" />
+    <ProjectReference Include="..\paAjmoPokusat.Models\RegistrovanjeIncidenata.Models.csproj" />
+    <ProjectReference Include="..\paAjmoPokusat.Utility\RegistrovanjeIncidenata.Utility.csproj" />
   </ItemGroup>
 
 </Project>

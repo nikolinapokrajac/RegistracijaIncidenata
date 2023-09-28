@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.33913.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "paAjmoPokusatVol2", "paAjmoPokusatVol2\paAjmoPokusatVol2.csproj", "{D58E37C6-04AC-4D05-AB77-F7678E2F0202}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RegistrovanjeIncidenataNP", "paAjmoPokusatVol2\RegistrovanjeIncidenataNP.csproj", "{D58E37C6-04AC-4D05-AB77-F7678E2F0202}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "paAjmoPokusat.DataAccess", "paAjmoPokusat.DataAccess\paAjmoPokusat.DataAccess.csproj", "{8E97DF62-BE66-4E91-B5C7-52E0302AF4F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RegistrovanjeIncidenata.DataAccess", "paAjmoPokusat.DataAccess\RegistrovanjeIncidenata.DataAccess.csproj", "{8E97DF62-BE66-4E91-B5C7-52E0302AF4F5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "paAjmoPokusat.Models", "paAjmoPokusat.Models\paAjmoPokusat.Models.csproj", "{A05E58F9-FE58-491D-8EDB-8D69B6F638AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RegistrovanjeIncidenata.Models", "paAjmoPokusat.Models\RegistrovanjeIncidenata.Models.csproj", "{A05E58F9-FE58-491D-8EDB-8D69B6F638AA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "paAjmoPokusat.Utility", "paAjmoPokusat.Utility\paAjmoPokusat.Utility.csproj", "{34F119D3-1CD4-4D2A-A78F-3B18351246A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RegistrovanjeIncidenata.Utility", "paAjmoPokusat.Utility\RegistrovanjeIncidenata.Utility.csproj", "{34F119D3-1CD4-4D2A-A78F-3B18351246A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "paAjmoPokusat.EmailService", "paAjmoPokusat.EmailService\paAjmoPokusat.EmailService.csproj", "{5EDBF318-441C-4EA1-BD49-5E65435AE6CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RegistrovanjeIncidenata.EmailService", "paAjmoPokusat.EmailService\RegistrovanjeIncidenata.EmailService.csproj", "{5EDBF318-441C-4EA1-BD49-5E65435AE6CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -3,16 +3,16 @@ using Google.Apis.Gmail.v1;
 using Google.Apis.Services;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using MimeKit;
-using paAjmoPokusat.EmailService;
+using RegistrovanjeIncidenata.EmailService;
 using System.Text;
 using Message = Google.Apis.Gmail.v1.Data.Message;
 //using System.Net.Mail;
 
-namespace paAjmoPokusat.Utility
+namespace RegistrovanjeIncidenata.Utility
 {
     public class EmailSender : IEmailSender
     {
-        private readonly paAjmoPokusat.EmailService.EmailConfiguration _emailConfig;
+        private readonly RegistrovanjeIncidenata.EmailService.EmailConfiguration _emailConfig;
         public EmailSender(EmailConfiguration emailConfig)
         {
             _emailConfig = emailConfig;

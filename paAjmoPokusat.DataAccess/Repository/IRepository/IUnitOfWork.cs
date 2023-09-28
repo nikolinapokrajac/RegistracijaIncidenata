@@ -1,4 +1,4 @@
-﻿namespace paAjmoPokusat.DataAccess.Repository.IRepository
+﻿namespace RegistrovanjeIncidenata.DataAccess.Repository.IRepository
 {
     public interface IUnitOfWork
     {

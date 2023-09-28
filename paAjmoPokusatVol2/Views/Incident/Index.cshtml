@@ -1,4 +1,5 @@
-﻿@model List<Incident>
+﻿@using RegistrovanjeIncidenata.Models;
+@model List<Incident>
 <h1>@User.Identity.Name</h1>
 <h2>Lista incidenata</h2>
 <a asp-controller="Incident" asp-action="Upsert" class="btn btn-primary"><i class="bi bi-plus-square-fill"></i>  Dodaj incident</a>

@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace paAjmoPokusat.Models
+namespace RegistrovanjeIncidenata.Models
 {
     public class IncidentType
     {

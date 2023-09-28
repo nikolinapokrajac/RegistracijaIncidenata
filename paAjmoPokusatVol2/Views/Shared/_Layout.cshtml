@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - paAjmoPokusatVol2</title>
+    <title>@ViewData["Title"] - Registrovanje incidenata</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/paAjmoPokusatVol2.styles.css" asp-append-version="true" />
@@ -18,7 +18,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.min.css
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">paAjmoPokusatVol2</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Registrovanje inicidenata</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -31,7 +31,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.min.css
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li> *@
-                       @if (User.IsInRole(paAjmoPokusat.Utility.SD.Role_Admin))
+                       @if (User.IsInRole(RegistrovanjeIncidenata.Utility.SD.Role_Admin))
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -53,7 +53,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.min.css
                                 </ul>
                             </li>
                         }
-                        else if (User.IsInRole(paAjmoPokusat.Utility.SD.Role_Operater))
+                        else if (User.IsInRole(RegistrovanjeIncidenata.Utility.SD.Role_Operater))
                         {
                             <a class="nav-link text-light" asp-area="" asp-controller="Incident" asp-action="Index">Incidenti</a>
                         }

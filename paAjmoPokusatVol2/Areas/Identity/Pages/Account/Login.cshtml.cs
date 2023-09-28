@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 
-namespace paAjmoPokusatVol2.Areas.Identity.Pages.Account
+namespace RegistrovanjeIncidenataNP.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {

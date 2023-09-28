@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using paAjmoPokusat.DataAccess.Data;
-using paAjmoPokusat.DataAccess.Repository.IRepository;
+using RegistrovanjeIncidenata.DataAccess.Data;
+using RegistrovanjeIncidenata.DataAccess.Repository.IRepository;
 using System.Linq.Expressions;
 
-namespace paAjmoPokusat.DataAccess.Repository
+namespace RegistrovanjeIncidenata.DataAccess.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {

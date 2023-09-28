@@ -1,6 +1,6 @@
-﻿using paAjmoPokusat.Models;
+﻿using RegistrovanjeIncidenata.Models;
 
-namespace paAjmoPokusat.DataAccess.Repository.IRepository
+namespace RegistrovanjeIncidenata.DataAccess.Repository.IRepository
 {
     public interface IMunicipalitieRepository : IRepository<Municipalitie>
     {

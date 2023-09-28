@@ -10,13 +10,13 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
-using paAjmoPokusat.Models;
-using paAjmoPokusat.Utility;
+using RegistrovanjeIncidenata.Models;
+using RegistrovanjeIncidenata.Utility;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
 
-namespace paAjmoPokusatVol2.Areas.Identity.Pages.Account
+namespace RegistrovanjeIncidenataNP.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {

@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using paAjmoPokusat.DataAccess.Repository.IRepository;
-using paAjmoPokusat.Models;
-using paAjmoPokusat.Models.ViewModels;
+using RegistrovanjeIncidenata.DataAccess.Repository.IRepository;
+using RegistrovanjeIncidenata.Models;
+using RegistrovanjeIncidenata.Models.ViewModels;
 
-namespace paAjmoPokusatVol2.Controllers
+namespace RegistrovanjeIncidenataNP.Controllers
 {
     public class IncidentController : Controller
     {
@@ -143,11 +143,11 @@ namespace paAjmoPokusatVol2.Controllers
 
             List<Incident> objIncidentList = null;
 
-            if (User.IsInRole(paAjmoPokusat.Utility.SD.Role_Operater))
+            if (User.IsInRole(RegistrovanjeIncidenata.Utility.SD.Role_Operater))
             {
                 objIncidentList = _unitOfWork.Incident.GetAll(i => i.UserNameOfPersonThatAddedIncident == User.Identity.Name, includeProperties: "IncidentType,Municipalitie").ToList();
             }
-            else if (User.IsInRole(paAjmoPokusat.Utility.SD.Role_Admin))
+            else if (User.IsInRole(RegistrovanjeIncidenata.Utility.SD.Role_Admin))
             {
                 objIncidentList = _unitOfWork.Incident.GetAll(includeProperties: "IncidentType,Municipalitie").ToList();
             }

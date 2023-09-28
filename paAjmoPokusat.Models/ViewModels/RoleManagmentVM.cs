@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace paAjmoPokusat.Models.ViewModels
+namespace RegistrovanjeIncidenata.Models.ViewModels
 {
     public class RoleManagmentVM
     {

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using paAjmoPokusat.Models;
+using RegistrovanjeIncidenata.Models;
 using System.Diagnostics;
 
-namespace paAjmoPokusatVol2.Controllers
+namespace RegistrovanjeIncidenataNP.Controllers
 {
     public class HomeController : Controller
     {

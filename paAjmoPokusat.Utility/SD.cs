@@ -1,4 +1,4 @@
-﻿namespace paAjmoPokusat.Utility
+﻿namespace RegistrovanjeIncidenata.Utility
 {
     public static class SD
     {

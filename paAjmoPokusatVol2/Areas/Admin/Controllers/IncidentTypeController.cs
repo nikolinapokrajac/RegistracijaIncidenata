@@ -1,11 +1,11 @@
 ﻿
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using paAjmoPokusat.DataAccess.Repository.IRepository;
-using paAjmoPokusat.Models;
-using paAjmoPokusat.Utility;
+using RegistrovanjeIncidenata.DataAccess.Repository.IRepository;
+using RegistrovanjeIncidenata.Models;
+using RegistrovanjeIncidenata.Utility;
 
-namespace paAjmoPokusatVol2.Areas.Admin.Controllers
+namespace RegistrovanjeIncidenataNP.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = SD.Role_Admin)]

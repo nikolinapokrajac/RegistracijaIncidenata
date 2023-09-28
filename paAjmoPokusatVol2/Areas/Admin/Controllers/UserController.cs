@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using paAjmoPokusat.DataAccess.Repository.IRepository;
-using paAjmoPokusat.Models;
-using paAjmoPokusat.Models.ViewModels;
-using paAjmoPokusat.Utility;
+using RegistrovanjeIncidenata.DataAccess.Repository.IRepository;
+using RegistrovanjeIncidenata.Models;
+using RegistrovanjeIncidenata.Models.ViewModels;
+using RegistrovanjeIncidenata.Utility;
 using System.Data;
 
 namespace BulkyBookWeb.Areas.Admin.Controllers

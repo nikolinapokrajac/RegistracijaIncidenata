@@ -1,4 +1,4 @@
-﻿namespace paAjmoPokusat.EmailService
+﻿namespace RegistrovanjeIncidenata.EmailService
 {
     public class Message
     {
