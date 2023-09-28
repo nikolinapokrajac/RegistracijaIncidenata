@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RegistrovanjeIncidenata.DataAccess.Data;
 
@@ -11,9 +12,11 @@ using RegistrovanjeIncidenata.DataAccess.Data;
 namespace RegistrovanjeIncidenata.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230928162327_addNewUser")]
+    partial class addNewUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,6 +50,22 @@ namespace RegistrovanjeIncidenata.DataAccess.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "341743f0 - asd2–42de - afbf - 59kmkkmk72cf6",
+                            ConcurrencyStamp = "341743f0 - asd2–42de - afbf - 59kmkkmk72cf6",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "1533fe23-dcad-4a7d-a42c-22e256d663d9",
+                            ConcurrencyStamp = "1533fe23-dcad-4a7d-a42c-22e256d663d9",
+                            Name = "Operater",
+                            NormalizedName = "OPERATER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -207,6 +226,13 @@ namespace RegistrovanjeIncidenata.DataAccess.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "02174cf0–9412–4cfe - afbf - 59f706d72cf6",
+                            RoleId = "341743f0 - asd2–42de - afbf - 59kmkkmk72cf6"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -228,7 +254,7 @@ namespace RegistrovanjeIncidenata.DataAccess.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("paAjmoPokusat.Models.Incident", b =>
+            modelBuilder.Entity("RegistrovanjeIncidenata.Models.Incident", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -329,7 +355,7 @@ namespace RegistrovanjeIncidenata.DataAccess.Migrations
                         });
                 });
 
-            modelBuilder.Entity("paAjmoPokusat.Models.IncidentImage", b =>
+            modelBuilder.Entity("RegistrovanjeIncidenata.Models.IncidentImage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -351,7 +377,7 @@ namespace RegistrovanjeIncidenata.DataAccess.Migrations
                     b.ToTable("IncidentImages");
                 });
 
-            modelBuilder.Entity("paAjmoPokusat.Models.IncidentType", b =>
+            modelBuilder.Entity("RegistrovanjeIncidenata.Models.IncidentType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -413,7 +439,7 @@ namespace RegistrovanjeIncidenata.DataAccess.Migrations
                         });
                 });
 
-            modelBuilder.Entity("paAjmoPokusat.Models.Municipalitie", b =>
+            modelBuilder.Entity("RegistrovanjeIncidenata.Models.Municipalitie", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -475,7 +501,7 @@ namespace RegistrovanjeIncidenata.DataAccess.Migrations
                         });
                 });
 
-            modelBuilder.Entity("paAjmoPokusat.Models.ApplicationUser", b =>
+            modelBuilder.Entity("RegistrovanjeIncidenata.Models.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
@@ -503,6 +529,25 @@ namespace RegistrovanjeIncidenata.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "02174cf0–9412–4cfe - afbf - 59f706d72cf6",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "28791cd7-0182-420e-abdb-926492a08238",
+                            Email = "admin@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedUserName = "ADMIN@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEC0+xHGDcG8AQskMuDFIiatwsgdSoVc7QTHruTECEEXapriQYOt3ZB0jRVJ7jL9IuA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "a1825d3f-8449-495d-a9f9-6f6cb357682f",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@gmail.com",
+                            LastName = "admin",
+                            Name = "admin"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -556,15 +601,15 @@ namespace RegistrovanjeIncidenata.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("paAjmoPokusat.Models.Incident", b =>
+            modelBuilder.Entity("RegistrovanjeIncidenata.Models.Incident", b =>
                 {
-                    b.HasOne("paAjmoPokusat.Models.IncidentType", "IncidentType")
+                    b.HasOne("RegistrovanjeIncidenata.Models.IncidentType", "IncidentType")
                         .WithMany()
                         .HasForeignKey("IncidentTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("paAjmoPokusat.Models.Municipalitie", "Municipalitie")
+                    b.HasOne("RegistrovanjeIncidenata.Models.Municipalitie", "Municipalitie")
                         .WithMany()
                         .HasForeignKey("MunicipalitieId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -575,9 +620,9 @@ namespace RegistrovanjeIncidenata.DataAccess.Migrations
                     b.Navigation("Municipalitie");
                 });
 
-            modelBuilder.Entity("paAjmoPokusat.Models.IncidentImage", b =>
+            modelBuilder.Entity("RegistrovanjeIncidenata.Models.IncidentImage", b =>
                 {
-                    b.HasOne("paAjmoPokusat.Models.Incident", "Incident")
+                    b.HasOne("RegistrovanjeIncidenata.Models.Incident", "Incident")
                         .WithMany("IncidentImages")
                         .HasForeignKey("IncidentId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -586,7 +631,7 @@ namespace RegistrovanjeIncidenata.DataAccess.Migrations
                     b.Navigation("Incident");
                 });
 
-            modelBuilder.Entity("paAjmoPokusat.Models.Incident", b =>
+            modelBuilder.Entity("RegistrovanjeIncidenata.Models.Incident", b =>
                 {
                     b.Navigation("IncidentImages");
                 });
