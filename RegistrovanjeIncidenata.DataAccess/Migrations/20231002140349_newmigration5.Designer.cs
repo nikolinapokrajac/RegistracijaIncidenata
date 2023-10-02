@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RegistrovanjeIncidenata.DataAccess.Data;
 
@@ -11,9 +12,11 @@ using RegistrovanjeIncidenata.DataAccess.Data;
 namespace RegistrovanjeIncidenata.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231002140349_newmigration5")]
+    partial class newmigration5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -476,7 +479,7 @@ namespace RegistrovanjeIncidenata.DataAccess.Migrations
                             Latitude = "43.923302668378604",
                             Longitude = "18.479616005630987",
                             Name = "Istočni Stari Grad",
-                            UrlImage = "\\images\\municipalitie\\223a5d1c-9b35-4417-9ed3-f885e82697e7.jpg"
+                            UrlImage = ""
                         },
                         new
                         {
@@ -485,7 +488,7 @@ namespace RegistrovanjeIncidenata.DataAccess.Migrations
                             Latitude = "43.837512769364075",
                             Longitude = "18.400499081072937",
                             Name = "Novi Grad",
-                            UrlImage = "\\images\\municipalitie\\26534751-2e54-4437-b719-3697a756534b.png"
+                            UrlImage = ""
                         },
                         new
                         {
@@ -494,7 +497,7 @@ namespace RegistrovanjeIncidenata.DataAccess.Migrations
                             Latitude = "43.81936393519571",
                             Longitude = "18.56738589641413",
                             Name = "Pale",
-                            UrlImage = "\\images\\municipalitie\\pale.jpg"
+                            UrlImage = ""
                         });
                 });
 
@@ -532,14 +535,14 @@ namespace RegistrovanjeIncidenata.DataAccess.Migrations
                         {
                             Id = "02174cf0–9412–4cfe - afbf - 59f706d72cf6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5001157c-0a2e-4b48-8677-ed0c850dcdd9",
+                            ConcurrencyStamp = "85439842-34e6-42e8-98ab-a0e2761ab3d9",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENzNwt1CdcUQ+xTSw0jmh/n08kBZsU7ib4mEXOh96fbMA+vvr83uhEpfHPILqZxXbQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIrQ9xuHS2eBpcflwk9jx8Y3raTUaYcgxzRhpMAQq3FQU0nlrOXnud5lDcRaPERlLQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5400689d-fb55-42f4-abdc-b8f42de57d53",
+                            SecurityStamp = "848bfbad-a466-400a-bfe4-d0cc6f2b676d",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com",
                             LastName = "admin",

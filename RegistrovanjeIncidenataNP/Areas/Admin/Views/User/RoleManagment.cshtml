@@ -16,23 +16,31 @@
             <div class="border p-3">
                 @*<div asp-validation-summary="ModelOnly"></div>*@
                 <div class="form-floating py-2 col-12">
-                    <input asp-for="ApplicationUser.Name" readonly class="form-control border-0 shadow" />
+                    <input asp-for="ApplicationUser.Name"  class="form-control border-0 shadow" />
                     <label asp-for="ApplicationUser.Name" class="ms-2"></label>
                 </div>
                 <div class="form-floating py-2 col-12">
-                    <input asp-for="ApplicationUser.Email" readonly class="form-control border-0 shadow" />
+                    <input asp-for="ApplicationUser.LastName"  class="form-control border-0 shadow" />
+                    <label asp-for="ApplicationUser.LastName" class="ms-2"></label>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="ApplicationUser.Email"  class="form-control border-0 shadow" />
                     <label asp-for="ApplicationUser.Email" class="ms-2"></label>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="ApplicationUser.PasswordHash" value="" class="form-control border-0 shadow" type="password" />
+                    <label asp-for="ApplicationUser.PasswordHash" class="ms-2">Unesite novu lozinku</label>
                 </div>
                 <div class="form-floating py-2 col-12">
                     <select asp-for="ApplicationUser.Role" asp-items="@Model.RoleList" class="form-select"></select>
                 </div>
                 <div class="row pt-2">
                     <div class="col-6 col-md-3">
-                        <button type="submit" class="btn btn-primary form-control">Update Role</button>
+                        <button type="submit" class="btn btn-primary form-control">Primijeni promjene</button>
                     </div>
                     <div class="col-6 col-md-3">
                         <a  asp-action="Index" class="btn btn-outline-primary border  form-control">
-                            Back to List
+                            Vrati se na listu
                         </a>
                     </div>
                 </div>

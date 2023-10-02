@@ -22,7 +22,7 @@ namespace RegistrovanjeIncidenata.Utility
             UserCredential credential = null;
 
             string[] scopes = { GmailService.Scope.GmailMetadata, GmailService.Scope.GmailSettingsSharing, GmailService.Scope.GmailSend, GmailService.Scope.GmailSettingsBasic, GmailService.Scope.GmailModify, GmailService.Scope.GmailReadonly };
-            using (var stream = new FileStream("C:\\Users\\ASUS\\Downloads\\clientsecret\\client-secret.json", FileMode.Open, FileAccess.Read))
+            using (var stream = new FileStream("Secrets/client-secret.json", FileMode.Open, FileAccess.Read))
             {
                 credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.FromStream(stream).Secrets, scopes, "user", CancellationToken.None);
             }

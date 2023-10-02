@@ -57,19 +57,38 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
                     .GetAwaiter().GetResult().FirstOrDefault();
 
             ApplicationUser applicationUser = _unitOfWork.ApplicationUser.Get(u => u.Id == roleManagmentVM.ApplicationUser.Id);
+            if (roleManagmentVM.ApplicationUser.Name != null && roleManagmentVM.ApplicationUser.Name != "")
+            {
+                applicationUser.Name = roleManagmentVM.ApplicationUser.Name;
+            }
+            if (roleManagmentVM.ApplicationUser.LastName != null && roleManagmentVM.ApplicationUser.LastName != "")
+            {
+                applicationUser.LastName = roleManagmentVM.ApplicationUser.LastName;
+            }
+            if (roleManagmentVM.ApplicationUser.Email != null && roleManagmentVM.ApplicationUser.Email != "")
+            {
+                applicationUser.Email = roleManagmentVM.ApplicationUser.Email;
+                applicationUser.NormalizedEmail = roleManagmentVM.ApplicationUser.Email.ToUpper();
+            }
+            if (roleManagmentVM.ApplicationUser.PasswordHash != null && roleManagmentVM.ApplicationUser.PasswordHash != "")
+            {
+                PasswordHasher<ApplicationUser> ph = new PasswordHasher<ApplicationUser>();
+                applicationUser.PasswordHash = ph.HashPassword(applicationUser, roleManagmentVM.ApplicationUser.PasswordHash);
+
+            }
+            _unitOfWork.ApplicationUser.Update(applicationUser);
 
 
             if (!(roleManagmentVM.ApplicationUser.Role == oldRole))
             {
-
-                _unitOfWork.ApplicationUser.Update(applicationUser);
-                _unitOfWork.Save();
-
-                _userManager.RemoveFromRoleAsync(applicationUser, oldRole).GetAwaiter().GetResult();
-                _userManager.AddToRoleAsync(applicationUser, roleManagmentVM.ApplicationUser.Role).GetAwaiter().GetResult();
+                if (oldRole != null)
+                {
+                    _userManager.RemoveFromRoleAsync(roleManagmentVM.ApplicationUser, oldRole).GetAwaiter().GetResult();
+                }
+                _userManager.AddToRoleAsync(roleManagmentVM.ApplicationUser, roleManagmentVM.ApplicationUser.Role).GetAwaiter().GetResult();
 
             }
-
+            _unitOfWork.Save();
             return RedirectToAction("Index");
         }
 
