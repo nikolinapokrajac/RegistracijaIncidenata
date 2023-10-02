@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RegistrovanjeIncidenata.DataAccess.Data;
 
@@ -11,9 +12,11 @@ using RegistrovanjeIncidenata.DataAccess.Data;
 namespace RegistrovanjeIncidenata.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231002140208_newmigration4")]
+    partial class newmigration4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -403,7 +406,7 @@ namespace RegistrovanjeIncidenata.DataAccess.Migrations
                         {
                             Id = 1,
                             Description = "Nesreće na putevima, sudari vozila, pešaci koji su udareni, oštećenja infrastrukture (npr. srušeni semafori, oštećenja na putu).",
-                            ImageUrl = "\\images\\incidentType\\56ac8ec3-dc74-4bd7-910b-fed4a55a07c3.webp",
+                            ImageUrl = "images\\incidentType\\dd64b58d-e339-4c81-ab7f-693e12483b2e.jpg",
                             Name = "Saobraćajni incidenti"
                         },
                         new
@@ -417,7 +420,7 @@ namespace RegistrovanjeIncidenata.DataAccess.Migrations
                         {
                             Id = 3,
                             Description = "Krađe, pljačke, napadi, vandalizam, trgovina drogom, nasilje u porodici, prevara i druge kriminalne aktivnosti.",
-                            ImageUrl = "\\images\\incidentType\\56ac8ec3-dc74-4bd7-910b-fed4a55a07c3.webp",
+                            ImageUrl = "images\\incidentType\\dd64b58d-e339-4c81-ab7f-693e12483b2e.jpg",
                             Name = "Kriminal"
                         },
                         new
@@ -532,14 +535,14 @@ namespace RegistrovanjeIncidenata.DataAccess.Migrations
                         {
                             Id = "02174cf0–9412–4cfe - afbf - 59f706d72cf6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "85439842-34e6-42e8-98ab-a0e2761ab3d9",
+                            ConcurrencyStamp = "014dbda7-94a2-4af0-93dc-9dd4bcb0041e",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIrQ9xuHS2eBpcflwk9jx8Y3raTUaYcgxzRhpMAQq3FQU0nlrOXnud5lDcRaPERlLQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEO97ifxLYX18CKuBitPP/UnzaJVZjTMlT5vx8cINPOFsPZU4vDQZtRlCMKKem8bN2Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "848bfbad-a466-400a-bfe4-d0cc6f2b676d",
+                            SecurityStamp = "8255a1b1-1707-4b43-9797-36e64f5626b1",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com",
                             LastName = "admin",

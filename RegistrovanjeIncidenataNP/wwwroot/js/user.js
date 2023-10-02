@@ -14,6 +14,7 @@ function loadDataTable() {
             { "data": "lastName", "width": "15%" },
             { "data": "email", "width": "15%" },
             { "data": "role", "width": "15%" },
+
             {
                 data: { id: "id" },
                 "render": function (data) {
@@ -21,7 +22,7 @@ function loadDataTable() {
                         return `
                         <div class="text-center">
                                 <a href="/admin/user/RoleManagment?userId=${data.id}" class="btn btn-danger text-white" style="cursor:pointer; width:150px;">
-                                     <i class="bi bi-pencil-square"></i> Permission
+                                     <i class="bi bi-pencil-square"></i> Uredi korisnika
                                 </a>
                         </div>
                     `

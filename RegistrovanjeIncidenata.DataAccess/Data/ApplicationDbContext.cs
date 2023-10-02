@@ -25,7 +25,7 @@ namespace RegistrovanjeIncidenata.DataAccess.Data
                     Id = 1,
                     Name = "Saobraćajni incidenti",
                     Description = "Nesreće na putevima, sudari vozila, pešaci koji su udareni, oštećenja infrastrukture (npr. srušeni semafori, oštećenja na putu).",
-                    ImageUrl = ""
+                    ImageUrl = "\\images\\incidentType\\56ac8ec3-dc74-4bd7-910b-fed4a55a07c3.webp"
                 },
                 new IncidentType
                 {
@@ -39,7 +39,7 @@ namespace RegistrovanjeIncidenata.DataAccess.Data
                     Id = 3,
                     Name = "Kriminal",
                     Description = "Krađe, pljačke, napadi, vandalizam, trgovina drogom, nasilje u porodici, prevara i druge kriminalne aktivnosti.",
-                    ImageUrl = ""
+                    ImageUrl = "\\images\\incidentType\\56ac8ec3-dc74-4bd7-910b-fed4a55a07c3.webp"
                 },
                  new IncidentType
                  {
