@@ -16,7 +16,7 @@ namespace RegistrovanjeIncidenataNP.Controllers
             _unitOfWork = unitOfWork;
             _webHostEnvironment = webHostEnvironment;
         }
-        public IActionResult Index(int id)
+        public IActionResult Index(int? id)
         {
             IncidentVM incidentVM = new()
             {
@@ -24,7 +24,8 @@ namespace RegistrovanjeIncidenataNP.Controllers
                 MunicipalitieList = _unitOfWork.Municipalitie.GetAll().Select(m => new SelectListItem { Text = m.Name, Value = m.Id.ToString() }),
                 Incident = new Incident()
             };
-            incidentVM.Incident = _unitOfWork.Incident.Get(u => u.Id == id, includeProperties: "IncidentImages");
+            incidentVM.Incident = _unitOfWork.Incident.Get(u => u.Id == id, includeProperties: "IncidentImages,IncidentType,Municipalitie");
+
             return View(incidentVM);
         }
     }

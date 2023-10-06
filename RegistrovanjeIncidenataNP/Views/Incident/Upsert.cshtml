@@ -1,6 +1,8 @@
 ﻿@using RegistrovanjeIncidenata.Models.ViewModels;
 
 @model IncidentVM
+@* <h1>Ispod je osoba koja je dodala incident</h1>
+<h2>@Model.Incident.IdOfUserThatAddedIncident</h2> *@
 
 <div class="card shadow border-0 my-4">
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
@@ -15,6 +17,8 @@
             <form method="post" class="=row" enctype="multipart/form-data">
                 <input asp-for="Incident.Id" hidden />
                 <input asp-for="Incident.IncidentImages" hidden />
+                <input asp-for="Incident.IdOfUserThatAddedIncident" hidden />
+                <input asp-for="Incident.UserNameOfPersonThatAddedIncident" hidden />
                 <div class="row">
                     <div class="col-10">
                         <div class="border p-3">
@@ -25,7 +29,7 @@
                             </div>
                             <div class=" col-12 py-2">
                                 <span asp-validation-for="Incident.Description" class="text-danger"></span>
-                                <label asp-for="Incident.Description" class="ns-2 text-muted"></label>
+                                <label asp-for="Incident.Description" class="ns-2 text-light"></label>
                                 @* <input asp-for="Incident.Description" class="form-control border-0 shadow" /> *@
                                 <textarea asp-for="Incident.Description" class="form-control border-0 shadow"></textarea>
                                 
@@ -47,7 +51,7 @@
                                 <input asp-for="Incident.IncidentAddress" class="form-control border-0 shadow" />
                             </div>
                             <div >
-                                <label>Unesite koordinate</label></div>
+                                <label class="text-light">Unesite koordinate</label></div>
                                 <div class="form-floating col-12 py-2">
                                 <label asp-for="Incident.IncidentLatitude" class="ns-2"></label>
                                     <input asp-for="Incident.IncidentLatitude" class="form-control border-0 shadow" />
@@ -76,13 +80,16 @@
                                 <div class="col-6 col-md-3">
                                     @*<button type="submit" class="btn btn-primary form-control">Dodaj novi incident</button>*@
                                     @if (Model.Incident.Id != 0){
+
+                                        Model.Incident.IdOfUserThatAddedIncident = Model.Incident.IdOfUserThatAddedIncident;
+                                        Model.Incident.UserNameOfPersonThatAddedIncident = Model.Incident.UserNameOfPersonThatAddedIncident;
                                         <button type="submit" class="btn btn-primary form-control">Uredi postojeći incident</button>
                                     }
                                     else
                                     {
-                                        
-                                            Model.Incident.UserNameOfPersonThatAddedIncident = User.Identity.Name.ToString();
-                                        
+                                        Model.Incident.UserNameOfPersonThatAddedIncident = User.Identity.Name.ToString();
+
+
                                         <button type="submit" class="btn btn-primary form-control">Dodaj novi incident</button>
                                     }
                                 </div>
