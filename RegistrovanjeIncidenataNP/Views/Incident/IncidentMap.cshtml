@@ -1,0 +1,36 @@
+﻿@using RegistrovanjeIncidenata.Models;
+@model List<Incident>
+<h1>@User.Identity.Name</h1>
+<h2>Lista incidenata</h2>
+<div class="container" style="display:flex; flex-direction:row;justify-content:space-between">
+    <div class="col-9 table-responsive">
+           <div id="map" style="width: 100%; height: 400px;"></div> 
+
+@* <table id="tblData2" class="table-bordered table table-striped" style="border:1px solid blue;border-collapse: collapse; width:100%; display:none">
+
+
+    </table> *@
+    </div>
+    <table id="tblData2" class="table-bordered table table-striped" style="border:1px solid blue;border-collapse: collapse; width:100%; display:none">
+    </table>
+@*     <div id="divSaFilterima" class="col-3"></div> *@
+@*     <div id="map" style="width: 100%; height: 400px;"></div> *@
+    </div>
+@* <div id="map" style="width: 100%; height: 400px;"></div> *@
+
+@section Scripts{
+    <script src="~/js/mapaIncidenata.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script>
+        var map = L.map('map').setView([44.168115, 17.786531], 8);
+
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        }).addTo(map);
+
+    </script>
+}
+

@@ -40,5 +40,8 @@ namespace RegistrovanjeIncidenata.Models
         public double IncidentLongitude { get; set; }
         [DisplayName("Geografska širina")]
         public double IncidentLatitude { get; set; }
+        [ValidateNever]
+        public string IdOfUserThatAddedIncident { get; set; }
+
     }
 }

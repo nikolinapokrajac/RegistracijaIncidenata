@@ -4,10 +4,11 @@
 
 
 $(document).ready(function () {
+   
     
     loadDataTable();
-    
-    document.querySelector('div.toolbar').innerHTML = '<input type="checkbox" id="chkPovrijedjeneOsobe" />Ima povrijeđenih osoba <br/><input type="checkbox" id="chkStradaleOsobe" />Ima stradalih osoba<br/> <label>Incidenti koji su se desilu u periodu od: </label> <input type="text" id="dateFrom"/> <br/> <label>Incidenti koji su se desilu u periodu do: </label> <input type="text" id="dateTo"/>';
+    var filtersDiv = document.querySelector("#divSaFilterima");
+    filtersDiv.innerHTML = '<div id="filterDiv" style="position:sticky;top:270px;right:20px;padding:10px;"><input type="checkbox" id="chkPovrijedjeneOsobe" />Ima povrijeđenih osoba <br/><input type="checkbox" id="chkStradaleOsobe" />Ima stradalih osoba<br/> <label>Incidenti u periodu od: </label> <input type="date" style="width:11em" id="dateFrom"/> <br/> <label>Incidenti u periodu do: </label> <input type="date" style="width:11em" id="dateTo"/></br></div>';
    
     $('#chkPovrijedjeneOsobe').change(function () {
         var isChecked = $(this).prop('checked');
@@ -118,55 +119,28 @@ $(document).ready(function () {
         });
 
     });
+
+
 })
 
 
 
 
 
-function updateMapWithFilters() {
 
-    console.log(map);
-    var filteredData = dataTable.rows({ search: 'applied' }).data();
-    console.log(filteredData);
-
-    map.eachLayer(function (layer) {
-        if (layer instanceof L.Marker) {
-            map.removeLayer(layer);
-        }
-    });
-
-
-    filteredData.each(function (row) {
-
-        var lat = parseFloat(row.incidentLatitude).toFixed(6); 
-        var lng = parseFloat(row.incidentLongitude).toFixed(6);
-        console.log(lat, lng);
-        if (lng > 0 && lat > 0) {
-           var marker = L.marker([lat, lng]).addTo(map);
-            
-            var description = row.description.split("'").join("");
-            var descriptionFinal = description.split('"').join("");
-            console.log(description);
-            marker.bindPopup("Naziv incidenta: " + row.name + "<br>Opština u kojoj se desio incident: " + row.municipalitie.name + "<br>Adresa gdje se desio incident: " + row.incidentAddress + "<br>Vrsta incidenta: " + row.incidentType.name + "<br>Datum i vrijeme kad se desio incident: " + row.dateIncident + "<br>Broj povrijeđenih osoba u incidentu: " + row.injuredPeopleCount + "<br>Broj stradalih osoba u incidentu: " + row.deadPeopleCount + "<br/><a href='/AboutOneIncident/Index?id=" + row.id + "&name=" + row.name + "&description=" + descriptionFinal + " &municipalitieName=" + row.municipalitie.name + "&incidentTypeName=" + row.incidentType.name + "&injuredPeopleCount=" + row.injuredPeopleCount + "&deadPeopleCount=" + row.deadPeopleCount + "&dateOfIncident=" + row.dateIncident + "&incidentAddress=" + row.incidentAddress + "'>Opširnije o incidentu</a>"); // Replace with your data asp-route-id='row.id' asp-controller='AboutOneIncident' asp-action='Index'
-            
-        }
-
-    });
-}
 
 
 function loadDataTable() {
     console.log("nina");
     dataTable = $('#tblData').DataTable({
         "ajax": { url: '/incident/getall' },
-            "dom": '<"toolbar">frtip',
+        "dom": '<"toolbar">frtip',
         "columns": [
-            { data: 'name', "width": "15%" },
+                        { data: 'name', "width": "15%" },
             { data: 'description', "width": "25%" },
             { data: 'incidentType.name', "width": "15%" },
             { data: 'municipalitie.name', "width": "15%" },
-            { data: 'dateIncident', "width": "15%" },
+            { data: 'dateIncident', "width": "25%" },
             { data: 'injuredPeopleCount', "width": "5%" },
             { data: 'deadPeopleCount', "width": "5%" },
             {
@@ -178,59 +152,77 @@ function loadDataTable() {
                 }
             }
         ],
+        "columnDefs": [
+            {
+                "targets": 4, 
+                "render": function (data, type, row) {
+                    var dateFromDb = new Date(data);
+                    var formattedDate = ("0" + dateFromDb.getDate()).slice(-2) + "/" + ("0" + (dateFromDb.getMonth() + 1)).slice(-2) + "/" + dateFromDb.getFullYear();
+                    return formattedDate;
+                },
+            },
+        ],
+        "responsive": true,
+        paging: true,
+
+        initComplete: function () {
+
+            var filterContainer = document.querySelector('#filterDiv');
+            console.log(filterContainer);
+
+        
+            this.api().columns([2, 3]).every(function () {
+                let column = this;
+                let select = document.createElement('select');
+                let label = document.createElement('label'); 
+                let div = document.createElement('div'); 
+
+                if (column[0] == 2) {
+                    select.add(new Option('Svi tipovi incidenata'));
+                    label.textContent = 'Tip incidenta:  ';
+                }
+                if (column[0] == 3) {
+                    select.add(new Option('Sve opštine'));
+                    label.textContent = 'Opština:  '; 
+                }
+
+                div.appendChild(label);
 
 
-
-     
-        initComplete: function SelectList() {
-            this.api()
-                .columns([2, 3]).every(function () {
-                    let column = this;
+                div.appendChild(select);
+                div.style = "display:flex; flex-direction:row;justify-content:space-between;";
+                select.style = "width:11em";
 
 
-                    let select = document.createElement('select');
-                    console.log("OVO JE ZA KOLONU");
-                    console.log(column);
-                    console.log("SVE");
-                    if (column[0] == 2) {
-                        select.add(new Option('Svi tipovi incidenata'));
-                    }
-                    if (column[0] == 3) {
-                        select.add(new Option('Sve opštine'));
-                    }
-
-                    column.footer().replaceChildren(select);
-                    
+                filterContainer.appendChild(div);
 
 
-                    select.addEventListener('change', function () {
-                        var val = DataTable.util.escapeRegex(select.value);
+                select.addEventListener('change', function () {
+                    var val = DataTable.util.escapeRegex(select.value);
 
-                        column
-                            .search((val === 'Svi tipovi incidenata' || val === 'Sve opštine') ? '' : '^' + val + '$', true, false)
-                            .draw();
-                    });
-
+                    console.log("Vrijednost: "+val);
                     column
-                        .data()
-                        .unique()
-                        .sort()
-                        .each(function (d, j) {
-                            select.add(new Option(d));
-                        });
+
+                        .search((val === 'Svi tipovi incidenata' || val === 'Sve opštine') ? '' : '^' + val + '$', true, false)
+                        .draw();
                 });
 
+
+                column
+                    .data()
+                    .unique()
+                    .sort()
+                    .each(function (d, j) {
+                        select.add(new Option(d));
+                    });
+            });
         }
     });
+}
 
 
   
-    dataTable.on('draw.dt', function () {
-        console.log("usao za mape");
-       
-        updateMapWithFilters();
-    });
-    }
+
 
 
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using RegistrovanjeIncidenata.DataAccess.Repository.IRepository;
 using RegistrovanjeIncidenata.Models;
@@ -6,9 +7,11 @@ using RegistrovanjeIncidenata.Models.ViewModels;
 
 namespace RegistrovanjeIncidenataNP.Controllers
 {
+
     public class IncidentController : Controller
     {
-
+        public string UserName { get; set; }
+        public string UserId { get; set; }
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
@@ -27,7 +30,13 @@ namespace RegistrovanjeIncidenataNP.Controllers
             return View(objIncidentList);
         }
 
+        public IActionResult IncidentMap()
+        {
 
+            List<Incident> objIncidentList = null;
+
+            return View(objIncidentList);
+        }
 
         public IActionResult Upsert(int? id)
         {
@@ -45,6 +54,8 @@ namespace RegistrovanjeIncidenataNP.Controllers
             else
             {
                 incidentVM.Incident = _unitOfWork.Incident.Get(u => u.Id == id, includeProperties: "IncidentImages");
+                this.UserName = incidentVM.Incident.UserNameOfPersonThatAddedIncident;
+                this.UserId = incidentVM.Incident.IdOfUserThatAddedIncident;
                 return View(incidentVM);
             }
         }
@@ -53,8 +64,17 @@ namespace RegistrovanjeIncidenataNP.Controllers
 
         public IActionResult Upsert(IncidentVM incidentVM, List<IFormFile> files)
         {
-            incidentVM.Incident.UserNameOfPersonThatAddedIncident = User.Identity.Name.ToString();
 
+            string userId = (string)User.Identity.GetUserId().ToString();
+
+            if (incidentVM.Incident.Id == 0)
+            {
+                incidentVM.Incident.UserNameOfPersonThatAddedIncident = User.Identity.Name.ToString();
+                incidentVM.Incident.IdOfUserThatAddedIncident = userId;
+
+            }
+
+            //Guid myGuid = new Guid(User.Identity.GetUserId().ToString());
             if (ModelState.IsValid)
             {
                 if (incidentVM.Incident.Id == 0)
@@ -178,7 +198,24 @@ namespace RegistrovanjeIncidenataNP.Controllers
 
             return Json(new { success = true, message = "Uspješno obrisan incident" });
         }
+        [HttpGet]
+        public IActionResult GetAllIncidentsForMap()
+        {
 
+
+            List<Incident> objIncidentList = null;
+
+            if (User.IsInRole(RegistrovanjeIncidenata.Utility.SD.Role_Operater))
+            {
+                objIncidentList = _unitOfWork.Incident.GetAll(i => i.UserNameOfPersonThatAddedIncident == User.Identity.Name, includeProperties: "IncidentType,Municipalitie").ToList();
+            }
+            else if (User.IsInRole(RegistrovanjeIncidenata.Utility.SD.Role_Admin))
+            {
+                objIncidentList = _unitOfWork.Incident.GetAll(includeProperties: "IncidentType,Municipalitie").ToList();
+            }
+            Console.WriteLine(objIncidentList.Count);
+            return Json(new { data = objIncidentList });
+        }
         #endregion
     }
 }
