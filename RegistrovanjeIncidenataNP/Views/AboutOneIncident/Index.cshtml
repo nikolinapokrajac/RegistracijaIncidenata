@@ -9,8 +9,7 @@
 
     <br/>
 
-
-
+<input asp-for="Incident.Id" hidden />
 
 <label>Opis incidenta: @Html.Raw(RegistrovanjeIncidenata.Utility.StringUtility.StripPTags(Model.Incident.Description))</label>
 </br>
@@ -33,7 +32,73 @@
 </br>
 <label>Adresa na kojoj se desio incident: @Model.Incident.IncidentAddress</label>
 </br>
-@foreach (IncidentImage slika in Model.Incident.IncidentImages)
+@* @foreach (IncidentImage slika in Model.Incident.IncidentImages)
 {
     <img src="@slika.ImageUrl" style="height:100px; width:100px;">
-}
+} *@
+
+<div class="modal fade" id="imagesModal" tabindex="-1" aria-labelledby="imagesModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+           
+            <div class="modal-body">
+                <div id="imagesCarousel" class="carousel carousel-dark">
+                    <div class="carousel-indicators">
+                        @for (int i = 0; i < Model.Incident.IncidentImages.Count; i++)
+                        {
+                            if (i == 0)
+                            {
+                                <button type="button" data-bs-target="#imagesCarousel" data-bs-slide-to="@i" aria-current="true" class="active" aria-label="Slide @i"></button>
+                            }
+                            else
+                            {
+                                <button type="button" data-bs-target="#imagesCarousel" data-bs-slide-to="@i" aria-current="true" aria-label="Slide @i"></button>
+                            }
+
+
+                        }
+                    </div>
+
+
+                    <div id="divSlike" class="carousel-inner">
+                        @if (Model.Incident != null && Model.Incident.IncidentImages != null)
+                        {
+                            for (int i = 0; i < Model.Incident.IncidentImages.Count; i++)
+                            {
+                                IncidentImage slika = Model.Incident.IncidentImages[i];
+                                if (i == 0)
+                                {
+                                    <div class="carousel-item active">
+                                        <img src="@slika.ImageUrl" class="d-block w-100">
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="carousel-item">
+                                        <img src="@slika.ImageUrl" class="d-block w-100">
+                                    </div>
+                                }
+
+                            }
+                        }
+                    </div>
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#imagesCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#imagesCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#imagesModal">
+    Galerija slika
+</button>
+

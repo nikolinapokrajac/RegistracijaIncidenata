@@ -37,6 +37,7 @@ namespace RegistrovanjeIncidenataNP.Areas.Admin.Controllers
                 ModelState.AddModelError("name", "Dužina polja ne smije biti veća od 50 karaktera.");
             if (ModelState.IsValid)
             {
+
                 string wwwRootPath = _webHostEnvironment.WebRootPath;
                 if (file != null)
                 {
@@ -48,10 +49,14 @@ namespace RegistrovanjeIncidenataNP.Areas.Admin.Controllers
                     }
                     obj.UrlImage = @"\images\municipalitie\" + fileName;
                 }
+                else
+                {
+                    obj.UrlImage = "";
 
+                }
                 _unitOfWork.Municipalitie.Add(obj);
                 _unitOfWork.Save();
-                TempData["success"] = "Uspješno dodana nova vrsta incidenta";
+                TempData["success"] = "Uspješno dodana nova opština";
                 return RedirectToAction("Index");
             }
             return View(obj);

@@ -1,5 +1,26 @@
 /* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+.carousel-inner {
+    height: 50vh;
+}
+
+.carousel-item {
+    position: absolute !important;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.carousel-item img {
+    height: 100%; 
+    object-fit: contain; 
+}
+
+.modal-content{
+    background: rgb(0, 0, 0, 0.0001);
+    border: none;
+}
 
 a.navbar-brand {
     white-space: normal;
@@ -88,6 +109,10 @@ bg-success {
     border-color: #425F4B !important;
 }
 
+.card-header{
+    border: none;
+    background: white;
+}
 
 
 /* btn-outline-primary */
@@ -537,3 +562,37 @@ bg-success {
         background-color: #578553;
         border-color: #578553;
     }
+
+.imageContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+}
+
+.img-fill {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+} {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.img-fill {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+footer{
+    position:initial !important;
+}
+td > p{
+    height:100px;
+    overflow:auto;
+}

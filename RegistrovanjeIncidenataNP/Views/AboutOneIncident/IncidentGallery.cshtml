@@ -1,0 +1,86 @@
+﻿@using RegistrovanjeIncidenata.Models.ViewModels;
+@using RegistrovanjeIncidenata.Models;
+@model IncidentVM
+
+
+
+<div id="imagesCarousel" class="carousel carousel-dark slide">
+    <div class="carousel-indicators">
+        @for(int i=0; i<Model.Incident.IncidentImages.Count; i++)
+        {
+            if(i == 0)
+            {
+                <button type="button" data-bs-target="#imagesCarousel" data-bs-slide-to="@i" aria-current="true" class="active" aria-label="Slide @i"></button>
+            }
+            else
+            {
+                <button type="button" data-bs-target="#imagesCarousel" data-bs-slide-to="@i" aria-current="true" aria-label="Slide @i"></button>
+            }
+
+
+        }
+    </div>
+
+
+    <div id="divSlike" class="carousel-inner">
+        @if (Model.Incident != null && Model.Incident.IncidentImages != null)
+        {
+            for (int i = 0; i < Model.Incident.IncidentImages.Count; i++)
+            {
+                IncidentImage slika = Model.Incident.IncidentImages[i];
+                if(i == 0)
+                {
+                    <div class="carousel-item active">
+                        <img src="@slika.ImageUrl" class="d-block w-100">
+                    </div>
+                }
+                else
+                {
+                    <div class="carousel-item">
+                        <img src="@slika.ImageUrl" class="d-block w-100">
+                    </div>
+                }
+
+            }
+        }
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#imagesCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#imagesCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+
+</div>
+
+@* <div id="divSlike" style="height: 100vh;" class="owl-carousel owl-theme align-items-center">
+    @if(Model.Incident != null && Model.Incident.IncidentImages != null)
+    {
+        foreach (IncidentImage slika in Model.Incident.IncidentImages)
+        {
+            <div id="pojedinacnaSlika" class="item" style="text-align: center;">
+                    <img src="@slika.ImageUrl" style="height:200px; width:200px;">
+            </div>
+        }
+    }
+</div>
+
+
+
+<script src="jquery-3.5.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/j
+query.min.js"></script>
+<script src="~/js/owl.carousel.min.js"></script>
+
+<script type="text/javascript">
+    
+    $('.owl-carousel').owlCarousel({
+        center: true,
+        loop: true,
+        margin: 50,
+        nav: true,
+    })
+</script> *@

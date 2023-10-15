@@ -28,5 +28,19 @@ namespace RegistrovanjeIncidenataNP.Controllers
 
             return View(incidentVM);
         }
+
+
+        public IActionResult IncidentGallery(int? id)
+        {
+            IncidentVM incidentVM = new()
+            {
+                IncidentTypeList = _unitOfWork.IncidentType.GetAll().Select(u => new SelectListItem { Text = u.Name, Value = u.Id.ToString() }),
+                MunicipalitieList = _unitOfWork.Municipalitie.GetAll().Select(m => new SelectListItem { Text = m.Name, Value = m.Id.ToString() }),
+                Incident = new Incident()
+            };
+            incidentVM.Incident = _unitOfWork.Incident.Get(u => u.Id == id, includeProperties: "IncidentImages,IncidentType,Municipalitie");
+
+            return View(incidentVM);
+        }
     }
 }

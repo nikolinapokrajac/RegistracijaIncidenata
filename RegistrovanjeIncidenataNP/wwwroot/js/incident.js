@@ -8,7 +8,7 @@ $(document).ready(function () {
     
     loadDataTable();
     var filtersDiv = document.querySelector("#divSaFilterima");
-    filtersDiv.innerHTML = '<div id="filterDiv" style="position:fixed;top:270px;right:20px;"><input type="checkbox" id="chkPovrijedjeneOsobe" />Ima povrijeđenih osoba <br/><input type="checkbox" id="chkStradaleOsobe" />Ima stradalih osoba<br/> <label>Incidenti u periodu od: </label> <input type="date" style="width:11em" id="dateFrom"/> <br/> <label>Incidenti u periodu do: </label> <input type="date" style="width:11em" id="dateTo"/></br></div>';
+    filtersDiv.innerHTML = '<div id="filterDiv" style="position:sticky;top:270px;right:20px;padding:10px;"><input type="checkbox" id="chkPovrijedjeneOsobe" />Ima povrijeđenih osoba <br/><input type="checkbox" id="chkStradaleOsobe" />Ima stradalih osoba<br/> <label>Incidenti u periodu od: </label> <input type="date" style="width:11em" id="dateFrom"/> <br/> <label>Incidenti u periodu do: </label> <input type="date" style="width:11em" id="dateTo"/></br></div>';
    
     $('#chkPovrijedjeneOsobe').change(function () {
         var isChecked = $(this).prop('checked');
@@ -162,7 +162,8 @@ function loadDataTable() {
                 },
             },
         ],
-        responsive: true,
+        "responsive": true,
+        paging: true,
 
         initComplete: function () {
 

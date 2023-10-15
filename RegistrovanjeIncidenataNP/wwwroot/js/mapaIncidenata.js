@@ -26,7 +26,7 @@ $(document).ready(function () {
         ],
  
         paging: false,
-        responsive: true,
+        "responsive": true,
         initComplete: function () {
 
             var filterContainer = document.querySelector('#filterDiv');
