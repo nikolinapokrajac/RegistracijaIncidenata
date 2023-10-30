@@ -1,7 +1,7 @@
 ﻿@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Registracija";
 }
 
 <h1 class="text-center">@ViewData["Title"]</h1>
@@ -10,7 +10,7 @@
     <div class="col-md-4 mx-auto">
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
 @*             <h2>Create a new account.</h2> *@
-<h2>Registruj novog korisnika</h2>
+<h2 class="text-center">Registruj novog korisnika</h2>
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <div class="form-floating mb-3">
@@ -40,11 +40,11 @@
             </div>
             <div class="form-floating mb-3">
                 <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select">
-                    <option disabled selected>--Izaberite rolu--</option>
+                    <option disabled selected>--Izaberite ulogu korisnika--</option>
                 </select>
             </div>
 
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Registruj korisnika</button>
         </form>
     </div>
     @* <div class="col-md-6 col-md-offset-2"> *@

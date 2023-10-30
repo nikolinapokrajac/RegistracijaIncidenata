@@ -150,7 +150,8 @@ namespace RegistrovanjeIncidenataNP.Controllers
                 }
                 _unitOfWork.IncidentImage.Remove(imageToBeDeleted);
                 _unitOfWork.Save();
-                TempData["success"] = "Image deleted successfully";
+                //TempData["success"] = "Image deleted successfully";
+                TempData["success"] = "Slika uspješno obrisana";
             }
             return RedirectToAction(nameof(Upsert), new { id = incidentId });
         }

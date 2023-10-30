@@ -60,7 +60,7 @@ namespace RegistrovanjeIncidenataNP.Areas.Admin.Controllers
                     if (!string.IsNullOrEmpty(incidentTypePath))
                     {
 
-                        if (incidentType.ImageUrl != null)
+                        if (incidentType.ImageUrl != null && incidentType.Id != 0)
                         {
                             var oldImagePath = Path.Combine(wwwRootPath, incidentType.ImageUrl.TrimStart('\\'));
                             if (System.IO.File.Exists(oldImagePath))
@@ -75,13 +75,21 @@ namespace RegistrovanjeIncidenataNP.Areas.Admin.Controllers
                     }
                     incidentType.ImageUrl = @"\images\incidentType\" + fileName;
                 }
+                if (incidentType.Id == 0 && file == null)
+                {
+                    incidentType.ImageUrl = "";
+                }
                 if (incidentType.Id == 0)
                 {
                     _unitOfWork.IncidentType.Add(incidentType);
 
                 }
-                else
+                else if (incidentType.Id != 0)
                 {
+                    if (incidentType.ImageUrl == null)
+                    {
+                        incidentType.ImageUrl = "";
+                    }
                     _unitOfWork.IncidentType.Update(incidentType);
 
                 }

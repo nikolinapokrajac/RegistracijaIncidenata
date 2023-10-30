@@ -8,17 +8,16 @@
         <div class="row pb-2">
             </hr>
         </div>
+        <div class="row">
+            <div class="col-10">
         <div class="form-floating col-12 py-2">
             <label asp-for="Name" class="ns-2"></label>
             <input disabled asp-for="Name" class="form-control border-0 shadow" />
         </div>
         <div class="form-floating col-12 py-2">
             <label asp-for="Description" class="ns-2"></label>
-            <input disabled asp-for="Description" class="form-control border-0 shadow" />
-        </div>
-        <div class="form-floating col-12 py-2">
-            <label asp-for="ImageUrl" class="ns-2"></label>
-            <input disabled asp-for="ImageUrl" class="form-control border-0 shadow" />
+            @* <textarea asp-for="Description" class="form-control border-0 shadow" disabled>@Html.Raw(RegistrovanjeIncidenata.Utility.StringUtility.StripPTags(Model.Description))</textarea> *@
+            <input disabled class="form-control border-0 shadow" value="@Html.Raw(RegistrovanjeIncidenata.Utility.StringUtility.StripPTags(Model.Description))"/>
         </div>
         <div class="row">
             <div class="col-6 col-md-3">
@@ -29,4 +28,21 @@
             </div>
         </div>
     </div>
+    <div class="col-2">
+        <img src="@Model.ImageUrl" width="100%" />
+    </div>
+        </div>
+    </div>
 </form>
+@section Scripts{
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'anchor autolink charmap codesample emoticons  lists   table visualblocks wordcount',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough |  align lineheight | numlist bullist indent outdent',
+        });
+    </script>
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+            }

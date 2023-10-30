@@ -31,7 +31,66 @@ $(document).ready(function () {
 
             var filterContainer = document.querySelector('#filterDiv');
 
-   
+
+            
+            this.api().columns([4]).every(function () {
+                let column = this;
+                let date = document.querySelector("#dateFrom");
+                let dateTo = document.querySelector("#dateTo");
+                date.addEventListener('change', function () {
+                    
+                        console.log(date.value);
+                    if (!date.value) {
+                        date.value = "0001-01-01";
+                        date.dispatchEvent(new Event('change'));
+                    }
+                    else {
+                        let regexPattern = '^(?:(?!' + date.value + ').)*$'
+                        column.search(regexPattern, true, false).draw();
+                    }
+                    
+                    
+                    
+                });
+
+                dateTo.addEventListener('change', function () {
+                    console.log(date.value);
+                    if (!dateTo.value) {
+                        dateTo.value = "9999-12-31";
+                        dateTo.dispatchEvent(new Event('change'));
+                    }
+                    else {
+                        let regexPattern = '^(?:(?!' + dateTo.value + ').)*$'
+                        column.search(regexPattern, true, false).draw();
+                    }
+                    
+                });
+
+            });
+
+            this.api().columns([6]).every(function () {
+                let column = this;
+                let checkbox = document.querySelector("#chkStradaleOsobe");
+
+
+                checkbox.addEventListener('change', function () {
+                    let val = checkbox.checked;
+                    column.search(val ? '[^0]' : '', true, false).draw();
+                });
+            });
+
+            this.api().columns([5]).every(function () {
+                let column = this;
+                let checkbox = document.querySelector("#chkPovrijedjeneOsobe");
+
+                checkbox.addEventListener('change', function () {
+                    let val = checkbox.checked;
+                    console.log(val);
+                    column.search(val ? '[^0]' : '', true, false).draw();
+                    console.log('UUUUUAAAAA');
+                });
+            });
+
             this.api().columns([2, 3]).every(function () {
                 let column = this;
                 let select = document.createElement('select');
@@ -75,131 +134,175 @@ $(document).ready(function () {
                     });
             });
         }
+        
     });
     document.querySelector('div.toolbar').innerHTML = '<div id="filterDiv" style="position:fixed;top:270px;right:20px;"><input type="checkbox" id="chkPovrijedjeneOsobe" />Ima povrijeđenih osoba <br/><input type="checkbox" id="chkStradaleOsobe" />Ima stradalih osoba<br/> <label>Incidenti u periodu od: </label> <input type="date" style="width:11em" id="dateFrom"/> <br/> <label>Incidenti u periodu do: </label> <input type="date" style="width:11em" id="dateTo"/></br></div>';
     document.querySelector('#tblData2_filter').style = "display:none";
     document.querySelector('#tblData2_info').style = "display:none";
-    $('#chkPovrijedjeneOsobe').change(function () {
-        var isChecked = $(this).prop('checked');
-        var chkStradaleOsobe = $('#chkStradaleOsobe').prop('checked');
-        dataTable.rows().every(function () {
-            var rowData = this.data();
-            var columnValue = rowData['injuredPeopleCount'];
-            var columnValue2 = rowData['deadPeopleCount'];
-            if (isChecked && chkStradaleOsobe == false && columnValue > 0) {
-                this.nodes().to$().show();
-            } else if (isChecked && chkStradaleOsobe && columnValue > 0 && columnValue2 > 0) {
-                this.nodes().to$().show();
-            }
-            else if (isChecked == false && chkStradaleOsobe && columnValue2 > 0) {
-                this.nodes().to$().show();
-            }
-            else if (!isChecked && !chkStradaleOsobe) {
-                this.nodes().to$().show();
-            }
-            else {
-                this.nodes().to$().hide();
-            }
-        });
-    });
+    //$('#chkPovrijedjeneOsobe').change(function () {
+    //    var isChecked = $(this).prop('checked');
+    //    var chkStradaleOsobe = $('#chkStradaleOsobe').prop('checked');
+    //    dataTable.rows().every(function () {
+    //        var rowData = this.data();
+    //        var columnValue = rowData['injuredPeopleCount'];
+    //        var columnValue2 = rowData['deadPeopleCount'];
+    //        if (isChecked && chkStradaleOsobe == false && columnValue > 0) {
+    //            this.nodes().to$().show();
+    //        } else if (isChecked && chkStradaleOsobe && columnValue > 0 && columnValue2 > 0) {
+    //            this.nodes().to$().show();
+    //        }
+    //        else if (isChecked == false && chkStradaleOsobe && columnValue2 > 0) {
+    //            this.nodes().to$().show();
+    //        }
+    //        else if (!isChecked && !chkStradaleOsobe) {
+    //            this.nodes().to$().show();
+    //        }
+    //        else {
+    //            this.nodes().to$().hide();
+    //        }
+    //    });
 
 
-    $('#chkStradaleOsobe').change(function () {
-        var isChecked = $(this).prop('checked');
-        var chkPovrOsobe = $('#chkPovrijedjeneOsobe').prop('checked');
 
-        dataTable.rows().every(function () {
-            var rowData = this.data();
-            var columnValue = rowData['deadPeopleCount'];
-            var columnValue2 = rowData['injuredPeopleCount'];
-            if (isChecked && chkPovrOsobe == false && columnValue > 0) {
-                this.nodes().to$().show();
-            } else if (isChecked && chkPovrOsobe && columnValue > 0 && columnValue2 > 0) {
-                this.nodes().to$().show();
-            }
-            else if (isChecked == false && chkPovrOsobe && columnValue2 > 0) {
-                this.nodes().to$().show();
-            }
-            else if (!isChecked && !chkPovrOsobe) {
-                this.nodes().to$().show();
-            } else {
-                this.nodes().to$().hide();
-            }
-        });
-    });
+    //        updateMapWithFilters();
 
-    $('#dateFrom').change(function () {
-
-        var fromDateText = $(this).val();
-        var fromDate = new Date(fromDateText);
-        var ToDateText = $('#dateTo').val();
-        var toDate = new Date(ToDateText);
-
-        dataTable.rows().every(function () {
-            var rowData = this.data();
-            var columnValue = new Date(rowData['dateIncident']);
+    //    //datatable.draw();
+    //});
 
 
-            if (!(isNaN(fromDate.getTime())) && !(isNaN(toDate.getTime())) && columnValue >= fromDate && columnValue <= toDate) {
-                this.nodes().to$().show();
-            }
-            else if (!(isNaN(fromDate.getTime())) && (isNaN(toDate.getTime())) && columnValue >= fromDate) {
-                this.nodes().to$().show();
-            }
-            else if ((isNaN(fromDate.getTime())) && !(isNaN(toDate.getTime())) && columnValue <= toDate) {
-                this.nodes().to$().show();
-            }
-            else if (isNaN(fromDate.getTime()) && (isNaN(toDate.getTime()))) {
-                this.nodes().to$().show();
-            }
-            else {
-                this.nodes().to$().hide();
-            }
-        });
+    //$('#chkStradaleOsobe').change(function () {
+    //    var isChecked = $(this).prop('checked');
+    //    var chkPovrOsobe = $('#chkPovrijedjeneOsobe').prop('checked');
 
-    });
+    //    dataTable.rows().every(function () {
+    //        var rowData = this.data();
+    //        var columnValue = rowData['deadPeopleCount'];
+    //        var columnValue2 = rowData['injuredPeopleCount'];
+    //        if (isChecked && chkPovrOsobe == false && columnValue > 0) {
+    //            this.nodes().to$().show();
+    //            //updateMapWithFilters();
+    //        } else if (isChecked && chkPovrOsobe && columnValue > 0 && columnValue2 > 0) {
+    //            this.nodes().to$().show();
+    //            //updateMapWithFilters();
+    //        }
+    //        else if (isChecked == false && chkPovrOsobe && columnValue2 > 0) {
+    //            this.nodes().to$().show();
+    //            //updateMapWithFilters();
+    //        }
+    //        else if (!isChecked && !chkPovrOsobe) {
+    //            this.nodes().to$().show();
+    //            //updateMapWithFilters();
+    //        } else {
+    //            this.nodes().to$().hide();
+    //            //updateMapWithFilters();
+    //        }
+    //    });
+    //});
 
-    $('#dateTo').change(function () {
+    //$('#dateFrom').change(function () {
 
-        var ToDateText = $(this).val();
-        var toDate = new Date(ToDateText);
-        var fromDateText = $('#dateFrom').val();
-        var fromDate = new Date(fromDateText);
+    //    var fromDateText = $(this).val();
+    //    var fromDate = new Date(fromDateText);
+    //    var ToDateText = $('#dateTo').val();
+    //    var toDate = new Date(ToDateText);
 
-        dataTable.rows().every(function () {
-            var rowData = this.data();
-            var columnValue = new Date(rowData['dateIncident']);
+    //    dataTable.rows().every(function () {
+    //        var rowData = this.data();
+    //        var columnValue = new Date(rowData['dateIncident']);
 
-            if (!(isNaN(fromDate.getTime())) && !(isNaN(toDate.getTime())) && columnValue >= fromDate && columnValue <= toDate) {
-                this.nodes().to$().show();
-            }
-            else if (!(isNaN(fromDate.getTime())) && (isNaN(toDate.getTime())) && columnValue >= fromDate) {
-                this.nodes().to$().show();
-            }
-            else if ((isNaN(fromDate.getTime())) && !(isNaN(toDate.getTime())) && columnValue <= toDate) {
-                this.nodes().to$().show();
-            }
-            else if (isNaN(fromDate.getTime()) && (isNaN(toDate.getTime()))) {
-                this.nodes().to$().show();
-            }
-            else {
-                this.nodes().to$().hide();
-            }
-        });
 
-    });
+    //        if (!(isNaN(fromDate.getTime())) && !(isNaN(toDate.getTime())) && columnValue >= fromDate && columnValue <= toDate) {
+    //            this.nodes().to$().show();
+    //        }
+    //        else if (!(isNaN(fromDate.getTime())) && (isNaN(toDate.getTime())) && columnValue >= fromDate) {
+    //            this.nodes().to$().show();
+    //        }
+    //        else if ((isNaN(fromDate.getTime())) && !(isNaN(toDate.getTime())) && columnValue <= toDate) {
+    //            this.nodes().to$().show();
+    //        }
+    //        else if (isNaN(fromDate.getTime()) && (isNaN(toDate.getTime()))) {
+    //            this.nodes().to$().show();
+    //        }
+    //        else {
+    //            this.nodes().to$().hide();
+    //        }
+    //    });
+
+    //});
+
+    //$('#dateTo').change(function () {
+
+    //    var ToDateText = $(this).val();
+    //    var toDate = new Date(ToDateText);
+    //    var fromDateText = $('#dateFrom').val();
+    //    var fromDate = new Date(fromDateText);
+
+    //    dataTable.rows().every(function () {
+    //        var rowData = this.data();
+    //        var columnValue = new Date(rowData['dateIncident']);
+
+    //        if (!(isNaN(fromDate.getTime())) && !(isNaN(toDate.getTime())) && columnValue >= fromDate && columnValue <= toDate) {
+    //            this.nodes().to$().show();
+    //        }
+    //        else if (!(isNaN(fromDate.getTime())) && (isNaN(toDate.getTime())) && columnValue >= fromDate) {
+    //            this.nodes().to$().show();
+    //        }
+    //        else if ((isNaN(fromDate.getTime())) && !(isNaN(toDate.getTime())) && columnValue <= toDate) {
+    //            this.nodes().to$().show();
+    //        }
+    //        else if (isNaN(fromDate.getTime()) && (isNaN(toDate.getTime()))) {
+    //            this.nodes().to$().show();
+    //        }
+    //        else {
+    //            this.nodes().to$().hide();
+    //        }
+    //    });
+
+    //});
 
     dataTable.on('draw.dt', function () {
 
 
         updateMapWithFilters();
     });
+    $('#dateFrom').on('change', function () {
+        var specifiedDate = new Date($('#dateFrom').val());
+
+        $.fn.dataTable.ext.search.pop(); // Remove any previous custom search
+
+        if (specifiedDate) {
+            $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+                var dateValue = new Date(data[4]);
+                if (!specifiedDate) return true;
+                return dateValue > specifiedDate;
+            });
+
+            table.draw();
+        }
+    });
+
+    $('#dateTo').on('change', function () {
+        var specifiedDate = new Date($('#dateTo').val());
+
+        $.fn.dataTable.ext.search.pop(); // Remove any previous custom search
+
+        if (specifiedDate) {
+            $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+                var dateValue = new Date(data[4]);
+                if (!specifiedDate) return true;
+                return dateValue < specifiedDate;
+            });
+
+            table.draw();
+        }
+    });
 });
 
 function updateMapWithFilters() {
 
     var filteredData = dataTable.rows({ search: 'applied' }).data();
-
+    var deadPeople = $("#chkStradaleOsobe").prop('checked');
+    var injuredPeople = $("#chkPovrijedjeneOsobe").prop('checked');
 
     map.eachLayer(function (layer) {
         if (layer instanceof L.Marker) {
