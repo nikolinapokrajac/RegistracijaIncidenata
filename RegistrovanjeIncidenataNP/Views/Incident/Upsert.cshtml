@@ -8,7 +8,7 @@
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
         <div class="row">
             <div class="row">
-                <div class="col-12 text-center">
+                <div class="col-12 text-center text-light">
                     <h2>@(Model.Incident.Id != 0 ? "Uredi postojeći" : "Dodaj novi") incident</h2>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                                 <select asp-for="@Model.Incident.MunicipalitieId" asp-items="@Model.MunicipalitieList" class="form-select border-0 shadow">
                                     <option disabled selected>-Odaberi opštinu-</option>
                                 </select>
-                                <label asp-for="Incident.IncidentTypeId" class="ms-2"></label>
+                                <label asp-for="Incident.MunicipalitieId" class="ms-2"></label>
                             </div>
                             <div class="form-floating py-2 col-12">
                                 <input type="file" name="files" class="form-control border-0 shadow" multiple />
@@ -108,7 +108,7 @@
                                     <img src="@image.ImageUrl" width="100%"
                                          style="border-radius:5px; border:1px solid #bbb9b9" />
                                     <a asp-action="DeleteImage" class="btn btn-danger" asp-route-imageId="@image.Id">
-                                        <i class="bi bi-trash-fill"></i> Delete
+                                        <i class="bi bi-trash-fill"></i> Obriši
                                     </a>
                                 </div>
                             }

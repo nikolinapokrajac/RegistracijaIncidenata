@@ -89,6 +89,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
 
             }
             _unitOfWork.Save();
+            TempData["success"] = "Uspješno uređeni podaci o korisniku!";
             return RedirectToAction("Index");
         }
 

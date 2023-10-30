@@ -6,7 +6,7 @@
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
     <div class="row">
         <div class="col-12 text-center">
-                <h2 class="text-white py-2">Manage User Role</h2>
+                <h2 class="text-white py-2">Uredi podatke o korisniku</h2>
         </div>
     </div>
     </div>
@@ -17,11 +17,11 @@
                 @*<div asp-validation-summary="ModelOnly"></div>*@
                 <div class="form-floating py-2 col-12">
                     <input asp-for="ApplicationUser.Name"  class="form-control border-0 shadow" />
-                    <label asp-for="ApplicationUser.Name" class="ms-2"></label>
+                    <label asp-for="ApplicationUser.Name" class="ms-2">Ime</label>
                 </div>
                 <div class="form-floating py-2 col-12">
                     <input asp-for="ApplicationUser.LastName"  class="form-control border-0 shadow" />
-                    <label asp-for="ApplicationUser.LastName" class="ms-2"></label>
+                    <label asp-for="ApplicationUser.LastName" class="ms-2">Prezime</label>
                 </div>
                 <div class="form-floating py-2 col-12">
                     <input asp-for="ApplicationUser.Email"  class="form-control border-0 shadow" />

@@ -101,10 +101,14 @@ namespace RegistrovanjeIncidenataNP.Areas.Admin.Controllers
                     }
                     obj.UrlImage = @"\images\municipalitie\" + fileName;
                 }
+                else
+                {
+                    obj.UrlImage = "";
+                }
 
                 _unitOfWork.Municipalitie.Update(obj);
                 _unitOfWork.Save();
-                TempData["success"] = "Uspješno ažurirana postojeća vrsta incidenta";
+                TempData["success"] = "Uspješno ažurirani podaci o opštini";
                 return RedirectToAction("Index");
             }
             return View();

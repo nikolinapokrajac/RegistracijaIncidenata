@@ -137,7 +137,7 @@ function loadDataTable() {
         "dom": '<"toolbar">frtip',
         "columns": [
                         { data: 'name', "width": "15%" },
-            { data: 'description', "width": "25%" },
+            //{ data: 'description', "width": "25%" },
             { data: 'incidentType.name', "width": "15%" },
             { data: 'municipalitie.name', "width": "15%" },
             { data: 'dateIncident', "width": "25%" },
@@ -146,21 +146,24 @@ function loadDataTable() {
             {
                 data: 'id', "render": function (data) {
                     return `<div class="w-55 btn-group" role="group">
-                        <a href="/incident/upsert?id=${data}" class="btn btn-secondary"><i class="bi bi-pen-fill"></i> Uredi</a>
+                        <a href="/incident/upsert?id=${data}" class="btn btn-secondary"><i class="bi bi-pen-fill"></i> Uredi</a></br>
+                        <a href="/aboutoneincident/index?id=${data}" class="btn btn-secondary"><i class="bi bi-info-square-fill"></i> Detaljno</a></br>
                         <a onClick=Delete('/incident/delete?id=${data}') class="btn btn-secondary"><i class="bi bi-trash3-fill"></i> Obriši</a>
+
                     </div>`
                 }
             }
         ],
         "columnDefs": [
             {
-                "targets": 4, 
+                "targets": 3,    
                 "render": function (data, type, row) {
                     var dateFromDb = new Date(data);
                     var formattedDate = ("0" + dateFromDb.getDate()).slice(-2) + "/" + ("0" + (dateFromDb.getMonth() + 1)).slice(-2) + "/" + dateFromDb.getFullYear();
                     return formattedDate;
                 },
             },
+            
         ],
         "responsive": true,
         paging: true,
@@ -171,17 +174,17 @@ function loadDataTable() {
             console.log(filterContainer);
 
         
-            this.api().columns([2, 3]).every(function () {
+            this.api().columns([1, 2]).every(function () {
                 let column = this;
                 let select = document.createElement('select');
                 let label = document.createElement('label'); 
                 let div = document.createElement('div'); 
 
-                if (column[0] == 2) {
-                    select.add(new Option('Svi tipovi incidenata'));
+                if (column[0] == 1) {
+                    select.add(new Option('Svi tipovi'));
                     label.textContent = 'Tip incidenta:  ';
                 }
-                if (column[0] == 3) {
+                if (column[0] == 2) {
                     select.add(new Option('Sve opštine'));
                     label.textContent = 'Opština:  '; 
                 }
@@ -203,7 +206,7 @@ function loadDataTable() {
                     console.log("Vrijednost: "+val);
                     column
 
-                        .search((val === 'Svi tipovi incidenata' || val === 'Sve opštine') ? '' : '^' + val + '$', true, false)
+                        .search((val === 'Svi tipovi' || val === 'Sve opštine') ? '' : '^' + val + '$', true, false)
                         .draw();
                 });
 
